@@ -1,9 +1,9 @@
 // AUTHOR : Dušan Todorović
 
 import 'package:flutter/material.dart';
-import 'package:prototip/pages/login_page.dart';
-import 'package:prototip/pages/register_page.dart';
-import 'package:prototip/widgets/featured_product.dart';
+import 'package:sara/pages/login_page.dart';
+import 'package:sara/pages/register_page.dart';
+import 'package:sara/widgets/featured_product.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class LandingPage extends StatefulWidget {
