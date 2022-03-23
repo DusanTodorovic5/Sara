@@ -1,6 +1,8 @@
 // AUTHOR : Dušan Todorović
 
 import 'package:flutter/material.dart';
+import 'package:prototip/pages/login_page.dart';
+import 'package:prototip/pages/register_page.dart';
 import 'package:prototip/widgets/featured_product.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
@@ -54,7 +56,10 @@ class _LandingPageState extends State<LandingPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginPage(title: "Ulogujte se")),
+                    );
                   },
                   child: const Text(
                     "Ulogujte se",
@@ -66,7 +71,10 @@ class _LandingPageState extends State<LandingPage> {
                 SizedBox(width: 20),
                 GestureDetector(
                   onTap: () {
-                    
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RegisterPage(title: "Registracija")),
+                    );
                   },
                   child: const Text(
                     "Registracija",
