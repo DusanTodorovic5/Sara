@@ -1,3 +1,5 @@
+// AUTHOR : Dušan Todorović
+
 import 'package:flutter/material.dart';
 
 class FeaturedProduct {
