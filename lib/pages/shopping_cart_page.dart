@@ -108,6 +108,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                   SizedBox(
                     height: 55,
+                    width: 55,
                     child: ElevatedButton(
                       onPressed: () {},
                       child: const Icon(
@@ -187,6 +188,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                   SizedBox(
                     height: 55,
+                    width: 55,
                     child: ElevatedButton(
                       onPressed: () {},
                       child: const Icon(
@@ -266,6 +268,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                   SizedBox(
                     height: 55,
+                    width: 55,
                     child: ElevatedButton(
                       onPressed: () {},
                       child: const Icon(
@@ -345,10 +348,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   ),
                   SizedBox(
                     height: 55,
+                    width: 55,
                     child: ElevatedButton(
                       onPressed: () {},
-                      child: const Icon(
-                          IconData(0xe1bb, fontFamily: 'MaterialIcons')),
+                      child: const Icon(IconData(0xe1bb,
+                          fontFamily: 'MaterialIcons')), //kanta
                       style: ElevatedButton.styleFrom(
                         primary: const Color.fromARGB(255, 249, 206, 223),
                         fixedSize: const Size(200, 200),
