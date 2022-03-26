@@ -7,11 +7,10 @@ void main() {
 class WebApp extends StatelessWidget {
   const WebApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sara Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
