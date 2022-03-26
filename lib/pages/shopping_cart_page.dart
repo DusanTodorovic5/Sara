@@ -24,7 +24,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
     "pantalone prototip"
   ];
   final List<int> colorCodes = <int>[600, 500, 100];
-  int _itemCount = 0; //proveriti
+  List<int> _itemCount = [1,3,2,5]; //proveriti
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +76,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         color: Color.fromARGB(255, 140, 187, 241)),
                   ),
                   Text(
-                    _itemCount.toString(),
+                    _itemCount[0].toString(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -87,7 +87,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount++),
+                        onPressed: () => setState(() => {_itemCount[0]++}),
                         child: const Icon(
                             IconData(0xe799, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -95,7 +95,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount--),
+                        onPressed: () => setState(() => {if (_itemCount[0] > 1) _itemCount[0]--}),
                         child: const Icon(
                             IconData(0xe798, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -156,7 +156,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         color: Color.fromARGB(255, 140, 187, 241)),
                   ),
                   Text(
-                    _itemCount.toString(),
+                    _itemCount[1].toString(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -167,7 +167,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount++),
+                        onPressed: () => setState(() => _itemCount[1]++),
                         child: const Icon(
                             IconData(0xe799, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -175,7 +175,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount--),
+                        onPressed: () => setState(() => {if (_itemCount[1] > 1) _itemCount[1]--}),
                         child: const Icon(
                             IconData(0xe798, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -236,7 +236,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         color: Color.fromARGB(255, 140, 187, 241)),
                   ),
                   Text(
-                    _itemCount.toString(),
+                    _itemCount[2].toString(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -247,7 +247,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount++),
+                        onPressed: () => setState(() => _itemCount[2]++),
                         child: const Icon(
                             IconData(0xe799, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -255,7 +255,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount--),
+                        onPressed: () => setState(() => {if (_itemCount[2] > 1) _itemCount[2]--}),
                         child: const Icon(
                             IconData(0xe798, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -316,7 +316,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         color: Color.fromARGB(255, 140, 187, 241)),
                   ),
                   Text(
-                    _itemCount.toString(),
+                    _itemCount[3].toString(),
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -327,7 +327,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount++),
+                        onPressed: () => setState(() => _itemCount[3]++),
                         child: const Icon(
                             IconData(0xe799, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -335,7 +335,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () => setState(() => _itemCount--),
+                        onPressed: () => setState(() => {if (_itemCount[3] > 1) _itemCount[3]--}),
                         child: const Icon(
                             IconData(0xe798, fontFamily: 'MaterialIcons')),
                         style: ElevatedButton.styleFrom(
@@ -383,6 +383,25 @@ class _ShoppingCartState extends State<ShoppingCart> {
                 );
               },
               child: const Text("Kupi"),
+              shape:
+                  const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
+              backgroundColor: const Color.fromARGB(255, 140, 187, 241),
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          SizedBox(
+            width: 300,
+            child: FloatingActionButton(
+              heroTag: null,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TryOutPage()),
+                );
+              },
+              child: const Text("Isprobaj kombinaciju"),
               shape:
                   const BeveledRectangleBorder(borderRadius: BorderRadius.zero),
               backgroundColor: const Color.fromARGB(255, 140, 187, 241),
