@@ -1,3 +1,5 @@
+// AUTHOR : Dušan Todorović
+
 class Singleton {
   static final Singleton _singleton = Singleton._internal();
 
