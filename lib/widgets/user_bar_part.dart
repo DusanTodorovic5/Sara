@@ -8,6 +8,7 @@ import 'package:sara/pages/add_product_page.dart';
 import 'package:sara/pages/all_users_page.dart';
 import 'package:sara/pages/shopping_cart_page.dart';
 import 'package:sara/pages/wishing_list_page.dart';
+import 'package:badges/badges.dart';
 
 class UserBarPart {
   UserBarPart(this.context, this.fun);
@@ -39,26 +40,44 @@ class UserBarPart {
             ),
           ),
         ),
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ShoppingCart()),
-            );
-          },
+        Material(
+          color: Colors.transparent, // Button color
+          child: InkWell(
+            splashColor: Colors.grey, // Splash color
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ShoppingCart()),
+              );
+            },
+            child: Badge(
+              badgeContent: const Text("4"),
+              child: const Icon(Icons.shopping_cart),
+              position: BadgePosition.bottomEnd(),
+              badgeColor: const Color.fromARGB(255, 249, 206, 223),
+            ),
+          ),
         ),
         const SizedBox(
           width: 20,
         ),
-        IconButton(
-          icon: const Icon(MdiIcons.heart),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => WishingList()),
-            );
-          },
+        Material(
+          color: Colors.transparent, // Button color
+          child: InkWell(
+            splashColor: Colors.grey, // Splash color
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WishingList()),
+              );
+            },
+            child: Badge(
+              badgeContent: const Text("3"),
+              child: const Icon(MdiIcons.heart),
+              position: BadgePosition.bottomEnd(),
+              badgeColor: const Color.fromARGB(255, 249, 206, 223),
+            ),
+          ),
         ),
         const SizedBox(
           width: 20,

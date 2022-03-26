@@ -29,8 +29,8 @@ class _LandingPageState extends State<LandingPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.network(
-              "https://cdn.discordapp.com/attachments/951897655162834997/955874431211802664/logoWhite.png",
+            Image.asset(
+              "assets/logoWhite.png",
               fit: BoxFit.contain,
               height: 100,
             ),
@@ -213,12 +213,11 @@ class _LandingPageState extends State<LandingPage> {
       body: ListView(
         children: [
           ImageSlideshow(
-            width: double.infinity,
+            width: (MediaQuery.of(context).size.height - 100)/9 > MediaQuery.of(context).size.width/16 ?
+            MediaQuery.of(context).size.width:(MediaQuery.of(context).size.height - 100)/9*16,
 
-            height: MediaQuery.of(context).size.width *
-                    0.6 *
-                    MediaQuery.of(context).devicePixelRatio -
-                100,
+            height: (MediaQuery.of(context).size.height - 100)/9 > MediaQuery.of(context).size.width/16 ?
+            MediaQuery.of(context).size.width/16*9:MediaQuery.of(context).size.height - 100,
 
             initialPage: 0,
 
@@ -228,19 +227,25 @@ class _LandingPageState extends State<LandingPage> {
 
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.network(
-                  'https://e.snmc.io/i/600/s/8a9e8de02fef41e6894a958aaccfdef5/6389577/ipce-ahmedovski-i-orkestar-tomice-miljica-bila-si-devojcica-godina-mojih-cover-art.jpg',
+                borderRadius: BorderRadius.circular(25),
+                child: Image.asset(
+                  'assets/featured/first.png',
                   fit: BoxFit.fill,
                 ),
               ),
-              Image.network(
-                'https://i1.sndcdn.com/artworks-000234542603-qysvi2-t500x500.jpg',
-                fit: BoxFit.fill,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Image.asset(
+                  'assets/featured/second.png',
+                  fit: BoxFit.fill,
+                ),
               ),
-              Image.network(
-                'https://direct.rhapsody.com/imageserver/images/alb.52994008/600x600.jpg',
-                fit: BoxFit.fill,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Image.asset(
+                  'assets/featured/third.png',
+                  fit: BoxFit.fill,
+                ),
               ),
             ],
 
@@ -251,7 +256,7 @@ class _LandingPageState extends State<LandingPage> {
 
             /// Auto scroll interval.
             /// Do not auto scroll with null or 0.
-            autoPlayInterval: 3000,
+            autoPlayInterval: 4000,
 
             /// Loops back to first slide.
             isLoop: true,
@@ -266,7 +271,7 @@ class _LandingPageState extends State<LandingPage> {
                   width: MediaQuery.of(context).size.width * 0.33,
                   child: FeaturedProduct(
                           niska:
-                              "https://i.ytimg.com/vi/VlOe4tuVklg/sddefault.jpg")
+                              "assets/highlighted/highlight1.png",opis:"Nove ženske košulje")
                       .generisi(),
                 ),
                 flex: 1,
@@ -276,7 +281,7 @@ class _LandingPageState extends State<LandingPage> {
                   width: MediaQuery.of(context).size.width * 0.33,
                   child: FeaturedProduct(
                           niska:
-                              "https://i.ytimg.com/vi/VlOe4tuVklg/sddefault.jpg")
+                              "assets/highlighted/highlight2.png",opis:"Nove muške košulje")
                       .generisi(),
                 ),
                 flex: 1,
@@ -286,7 +291,7 @@ class _LandingPageState extends State<LandingPage> {
                   width: MediaQuery.of(context).size.width * 0.33,
                   child: FeaturedProduct(
                           niska:
-                              "https://i.ytimg.com/vi/VlOe4tuVklg/sddefault.jpg")
+                              "assets/highlighted/highlight3.png",opis:"Nove ženske farmerice")
                       .generisi(),
                 ),
                 flex: 1,
