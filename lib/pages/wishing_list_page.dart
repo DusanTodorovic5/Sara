@@ -22,20 +22,20 @@ class _WishingListState extends State<WishingList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 140, 187, 241),
-          toolbarHeight: 100,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                "assets/logoWhite.png",
-                fit: BoxFit.contain,
-                height: 100,
-              ),
-            ],
-          ),
-          centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 140, 187, 241),
+        toolbarHeight: 100,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              "assets/logoWhite.png",
+              fit: BoxFit.contain,
+              height: 100,
+            ),
+          ],
         ),
+        centerTitle: true,
+      ),
       body: ListView(
         children: [
           Card(
@@ -57,10 +57,12 @@ class _WishingListState extends State<WishingList> {
                 child: Image.asset(images[0], fit: BoxFit.fitHeight),
               ),
               trailing: Wrap(
-                spacing: 12, // space between two icons
+                alignment: WrapAlignment.end, //dodato
+                //spacing: 12, // space between two icons
                 children: <Widget>[
                   SizedBox(
                     height: 55,
+                    width: 55,
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -98,9 +100,10 @@ class _WishingListState extends State<WishingList> {
                 child: Image.asset(images[1], fit: BoxFit.fitHeight),
               ),
               trailing: Wrap(
-                spacing: 12, // space between two icons
+                //spacing: 12, // space between two icons
                 children: <Widget>[
                   SizedBox(
+                    width: 55,
                     height: 55,
                     child: ElevatedButton(
                       onPressed: () {},
@@ -138,10 +141,11 @@ class _WishingListState extends State<WishingList> {
                 child: Image.asset(images[2], fit: BoxFit.fitHeight),
               ),
               trailing: Wrap(
-                spacing: 12, // space between two icons
+                //spacing: 12, // ovde izmena
                 children: <Widget>[
                   SizedBox(
                     height: 55,
+                    width: 55,
                     child: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
@@ -150,7 +154,7 @@ class _WishingListState extends State<WishingList> {
                         shape: const CircleBorder(),
                       ),
                       child: const Icon(
-                        IconData(0xe1bb, fontFamily: 'MaterialIcons'),
+                        IconData(0xe1bb, fontFamily: 'MaterialIcons'), //kanta
                       ),
                       // color: Color.fromARGB(255, 140, 187, 241),
                     ),
