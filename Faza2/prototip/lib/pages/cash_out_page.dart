@@ -1,4 +1,4 @@
-//AUTHOR: Ivana Trtovic 
+//AUTHOR: Ivana Trtovic
 import 'package:flutter/material.dart';
 
 class CashOutPage extends StatefulWidget {
@@ -261,7 +261,7 @@ class _CashOutPageState extends State<CashOutPage> {
                   width: 300,
                   height: 45,
                   child: RaisedButton(
-                    child: Text("Plati", style: TextStyle(fontSize: 30)),
+                    child: Text("Kupi", style: TextStyle(fontSize: 30)),
                     textColor: Colors.white,
                     color: const Color.fromARGB(255, 140, 187, 241),
                     onPressed: () {},

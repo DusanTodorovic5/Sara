@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sara/classes/recenzija.dart';
+import 'package:sara/classes/singleton.dart';
 import 'package:sara/pages/register_page.dart';
 
 import 'list_products.dart';
@@ -17,14 +18,6 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   var recenzija =
       Recenzija(korisnik: "Pavle", recenzija: "Jako udobna kosulja.");
   var rec1 = Recenzija(korisnik: "Dusan", recenzija: "Prijatan materijal.");
@@ -75,11 +68,13 @@ class _ProductPageState extends State<ProductPage> {
                   )),
             ),
             Container(
-                width: constraints.maxWidth / 2,
-                child: Column(children: [
+              width: constraints.maxWidth / 2,
+              child: Column(
+                children: [
                   Container(
-                      height: constraints.maxHeight / 2,
-                      child: Column(children: [
+                    height: constraints.maxHeight / 2,
+                    child: Column(
+                      children: [
                         Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -139,48 +134,93 @@ class _ProductPageState extends State<ProductPage> {
                               ],
                             )),
                         Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                    height: 70,
-                                    width: 200,
-                                    child: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          "Dodaj u korpu",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Color.fromARGB(
-                                                      255, 140, 187, 241)),
-                                        ))),
-                                LikeButton(size: 70)
-                              ],
-                            )),
-                        Text("")
-                      ])),
-                  Text(
-                    "Recenzije",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 140, 187, 241),
-                        fontSize: 35,
-                        fontStyle: FontStyle.italic),
+                          padding: EdgeInsets.all(20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                  height: 70,
+                                  width: 200,
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: const Text(
+                                        "Dodaj u korpu",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                const Color.fromARGB(
+                                                    255, 140, 187, 241)),
+                                      ))),
+                              LikeButton(size: 70)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: Singleton().mod == "A"
+                        ? [
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: const Text("Dodaj Popust :"),
+                              style: ElevatedButton.styleFrom(
+                                primary:
+                                    const Color.fromARGB(255, 140, 187, 241),
+                              ),
+                            ),
+                            const TextField(
+                              decoration: InputDecoration(hintText: "20%"),
+                            )
+                          ]
+                        : [
+                            const Text(""),
+                          ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Recenzije",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 140, 187, 241),
+                            fontSize: 35,
+                            fontStyle: FontStyle.italic),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "U prototipu se ne mogu dodati nove recenzije",
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text("Dodaj Recenziju"),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(255, 140, 187, 241),
+                        ),
+                      ),
+                    ],
                   ),
                   Container(
-                      height: constraints.maxHeight / 3,
-                      child: SingleChildScrollView(
-                        child: Column(children: [
-                          recenzija.format(),
-                          rec1.format(),
-                          rec2.format(),
-                          rec3.format()
-                        ]),
-                      ))
-                ]))
+                    height: constraints.maxHeight / 3,
+                    child: SingleChildScrollView(
+                      child: Column(children: [
+                        recenzija.format(),
+                        rec1.format(),
+                        rec2.format(),
+                        rec3.format()
+                      ]),
+                    ),
+                  )
+                ],
+              ),
+            )
           ]);
         }));
   }

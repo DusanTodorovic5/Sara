@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:sara/classes/recenzija.dart';
+import 'package:sara/classes/singleton.dart';
 
 class ModProductPage extends StatefulWidget {
   const ModProductPage({Key? key}) : super(key: key);
@@ -66,8 +67,9 @@ class _ModProductPageState extends State<ModProductPage> {
                 width: constraints.maxWidth / 2,
                 child: Column(children: [
                   Container(
-                      height: constraints.maxHeight / 2,
-                      child: Column(children: [
+                    height: constraints.maxHeight / 2,
+                    child: Column(
+                      children: [
                         Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -127,36 +129,78 @@ class _ModProductPageState extends State<ModProductPage> {
                               ],
                             )),
                         Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                SizedBox(
-                                    height: 70,
-                                    width: 200,
-                                    child: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          "Dodaj u korpu",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Color.fromARGB(
-                                                      255, 140, 187, 241)),
-                                        ))),
-                                LikeButton(size: 70)
-                              ],
-                            )),
-                        Text("")
-                      ])),
-                  Text(
-                    "Recenzije",
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 140, 187, 241),
-                        fontSize: 35,
-                        fontStyle: FontStyle.italic),
+                          padding: EdgeInsets.all(20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                  height: 70,
+                                  width: 200,
+                                  child: TextButton(
+                                      onPressed: () {},
+                                      child: const Text(
+                                        "Dodaj u korpu",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                const Color.fromARGB(
+                                                    255, 140, 187, 241)),
+                                      ))),
+                              LikeButton(size: 70)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Recenzije",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 140, 187, 241),
+                            fontSize: 35,
+                            fontStyle: FontStyle.italic),
+                      ),
+                      Singleton().mod == "A"
+                          ? ElevatedButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "U prototipu se ne mogu dodati popusti",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text("Dodaj popust"),
+                              style: ElevatedButton.styleFrom(
+                                primary:
+                                    const Color.fromARGB(255, 140, 187, 241),
+                              ),
+                            )
+                          : ElevatedButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "U prototipu se ne mogu dodati nove recenzije",
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text("Dodaj Recenziju"),
+                              style: ElevatedButton.styleFrom(
+                                primary:
+                                    const Color.fromARGB(255, 140, 187, 241),
+                              ),
+                            ),
+                    ],
                   ),
                   Container(
                       height: constraints.maxHeight / 3,
