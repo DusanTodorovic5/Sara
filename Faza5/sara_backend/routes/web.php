@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\GlavniController;
+use \App\Http\Controllers\ModeratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::post('/login_submit',[GlavniController::class,'login_submit'])->name('login_submit');
+Route::get('/logout', [GlavniController::class, "logout"])->name('logout');
+
+Route::post('/obrisi_recenziju', [ModeratorController::class, "obrisi_recenziju"]);
