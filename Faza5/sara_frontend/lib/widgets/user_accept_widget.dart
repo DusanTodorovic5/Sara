@@ -16,21 +16,39 @@ class UserAcceptWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.all(10),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Text(user.username),
+        Text(
+          user.username,
+          style: TextStyle(
+              color: const Color.fromARGB(255, 140, 187, 241),
+              fontWeight: FontWeight.bold,
+              fontSize: 23),
+        ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ElevatedButton(
-                onPressed: () {
-                  prihvati(user.id);
-                },
-                child: const Text("Prihvati")),
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: ElevatedButton(
+                  onPressed: () {
+                    prihvati(user.id);
+                  },
+                  child: const Text("Prihvati"),
+                  style: ElevatedButton.styleFrom(
+                    textStyle: TextStyle(fontSize: 16),
+                    primary: const Color.fromARGB(255, 140, 187, 241),
+                  )),
+            ),
             ElevatedButton(
                 onPressed: () {
                   odbij(user.id);
                 },
-                child: const Text("Odbij")),
+                child: const Text("Odbij"),
+                style: ElevatedButton.styleFrom(
+                  textStyle: TextStyle(fontSize: 16),
+                  primary: const Color.fromARGB(255, 140, 187, 241),
+                )),
           ],
         )
       ]),
