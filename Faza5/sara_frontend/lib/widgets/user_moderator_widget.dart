@@ -31,6 +31,7 @@ class UserModeratorWidget extends StatelessWidget {
               promeniStanje(user.id);
             },
             iconColor: Colors.yellow,
+            isStarred: user.tip == 'M',
           )
         ],
       ),
