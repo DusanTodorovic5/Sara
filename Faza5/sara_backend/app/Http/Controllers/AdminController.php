@@ -18,9 +18,15 @@ class AdminController extends Controller
         return $pending;
      }
 
-     public function dodaj_moderatora($id){
+     public function dohv_korisnike(){
+         $korisnici =Korisnik::dohvatiSve();
+         return $korisnici;
+     }
+
+     public function moderatori($id){
         $korisnik=Korisnik::dohvSaId($id)[0];
-        $korisnik->Tip='M';
+        if($korisnik->Tip=='K')$korisnik->Tip='M';
+        else $korisnik->Tip='K';
         $success=$korisnik->save();
         if($success){
             return response()->json([
@@ -34,6 +40,7 @@ class AdminController extends Controller
             ]);
         }
     }
+
 
     public function prihvati_kor($id){
         $korisnik=Cekanje::dohvatiSaId($id)[0];

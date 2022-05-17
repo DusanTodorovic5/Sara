@@ -22,7 +22,11 @@ Route::get('/', function () {
 Route::get('/pending',[AdminController::class,'pending']);
 Route::get('/pending/{id}/true',[AdminController::class,'prihvati_kor']);
 Route::get('/pending/{id}/false',[AdminController::class,'odbij_kor']);
-Route::get('/moderator/{id}',[AdminController::class,'dodaj_moderatora']);
+Route::get('/moderator/{id}',[AdminController::class,'moderatori']);
+
+
+Route::get("/korisnici",[AdminController::class,'dohv_korisnike']);
+
 
 Route::post('/recenzija',[KorisnikController::class,'dodaj_recenziju']);
 Route::post('/popust',[ModeratorController::class,'dodaj_popust']);
