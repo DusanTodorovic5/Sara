@@ -20,9 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/pending',[AdminController::class,'pending']);
-Route::get('/pending/{id}/true',[AdminController::class,'prihvati_kor']);
-Route::get('/pending/{id}/false',[AdminController::class,'odbij_kor']);
-Route::get('/moderator/{id}',[AdminController::class,'moderatori']);
+Route::post('/pending/true',[AdminController::class,'prihvati_kor']);
+Route::post('/pending/false',[AdminController::class,'odbij_kor']);
+Route::post('/moderator',[AdminController::class,'moderatori']);
 
 
 Route::get("/korisnici",[AdminController::class,'dohv_korisnike']);

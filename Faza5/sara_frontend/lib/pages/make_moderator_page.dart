@@ -89,10 +89,13 @@ class _MakeModeratorPageState extends State<MakeModeratorPage> {
   }
 
   Future<bool> izvrsi(int id) async {
-    var url = Uri.parse("http://localhost:8000/moderator/${id}");
-    var response = await http.get(
+    var url = Uri.parse("http://localhost:8000/moderator");
+    var response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(<String, int>{
+        'id': id,
+      }),
     );
     var bod = jsonDecode(response.body);
     return bod['success'];

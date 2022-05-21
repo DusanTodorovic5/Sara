@@ -110,21 +110,23 @@ class _AcceptUsersPageState extends State<AcceptUsersPage> {
   }
 
   Future<bool> prihvati(int id) async {
-    var url = Uri.parse("http://localhost:8000/pending/${id}/true");
-    var response = await http.get(
-      url,
-      headers: {'Content-Type': 'application/json'},
-    );
+    var url = Uri.parse("http://localhost:8000/pending/true");
+    var response = await http.post(url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(<String, int>{
+          'id': id,
+        }));
     var bod = jsonDecode(response.body);
     return bod['success'];
   }
 
   Future<bool> odbij(int id) async {
-    var url = Uri.parse("http://localhost:8000/pending/${id}/false");
-    var response = await http.get(
-      url,
-      headers: {'Content-Type': 'application/json'},
-    );
+    var url = Uri.parse("http://localhost:8000/pending/false");
+    var response = await http.post(url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(<String, int>{
+          'id': id,
+        }));
     var bod = jsonDecode(response.body);
     return bod['success'];
   }

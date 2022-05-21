@@ -14,17 +14,17 @@ use Carbon\Carbon;
 class AdminController extends Controller
 {
     public function pending(){
-        $pending=Cekanje::dohvSve();
+        $pending=Cekanje::dohv_sve();
         return $pending;
      }
 
      public function dohv_korisnike(){
-         $korisnici =Korisnik::dohvatiSve();
+         $korisnici =Korisnik::dohvati_sve();
          return $korisnici;
      }
 
-     public function moderatori($id){
-        $korisnik=Korisnik::dohvSaId($id)[0];
+     public function moderatori(Request $request){
+        $korisnik=Korisnik::dohv_sa_id($request->id)[0];
         if($korisnik->Tip=='K')$korisnik->Tip='M';
         else $korisnik->Tip='K';
         $success=$korisnik->save();
@@ -42,9 +42,9 @@ class AdminController extends Controller
     }
 
 
-    public function prihvati_kor($id){
-        $korisnik=Cekanje::dohvatiSaId($id)[0];
-        Cekanje::obrisiSaId($id);       
+    public function prihvati_kor(Request $request){
+        $korisnik=Cekanje::dohvati_sa_id($request->id)[0];
+        Cekanje::obrisi_sa_id($request->id);       
       
         $user=new Korisnik;
 
@@ -72,8 +72,8 @@ class AdminController extends Controller
 
     }
 
-    public function odbij_kor($id){
-        $success=Cekanje::obrisiSaId($id);
+    public function odbij_kor(Request $request){
+        $success=Cekanje::obrisi_sa_id($request->id);
         if($success){
          return response()->json([
              'success'=>true,

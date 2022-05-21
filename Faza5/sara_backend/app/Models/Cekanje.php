@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
+/**
+ * Klasa Cekanje predstavlja tabelu odobravanje iz baze podataka.
+ * Pored polja iz baze sadrzi i funkcije za dohvatanje svih korisnika koji cekaju odobravanje,
+ * za dohvatanje korisnika sa zadatim ID i za brisanje korisnika sa zadatim ID
+ */
 class Cekanje extends Model
 {
     use HasFactory;
@@ -16,14 +20,23 @@ class Cekanje extends Model
         'Username','Password','ImeIPrezime','Email','Pol','Potroseno','Datum'
     ];
 
-
-    public static function dohvSve(){
+    /**
+     * Staticki metod dohv_sve vraca sve korisnike koji cekaju odobravanje naloga
+     */
+    public static function dohv_sve(){
         return Cekanje::all();
     }
-    public static function dohvatiSaId($id){
+    /**
+     * Staticki metod dohv_sa_id dohvata korisnika sa zadatom vrednoscu ID
+     */
+    public static function dohvati_sa_id($id){
         return Cekanje::where("ID",$id)->get();
     }
-    public static function obrisiSaId($id){
+    /**
+     * Staticki metod obrisi_sa_id brise korisinika sa zadatom vrednoscu ID iz tabele
+     * za odobravanje
+     */
+    public static function obrisi_sa_id($id){
        return Cekanje::where('ID',$id)->delete();
     }
 

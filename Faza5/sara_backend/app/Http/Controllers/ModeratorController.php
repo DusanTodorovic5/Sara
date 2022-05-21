@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 
 class ModeratorController extends Controller
 {
+    
     public function dodaj_popust(Request $request){
-        $proizvod=Proizvod::dohvatiSaId($request->id)[0];
+        $proizvod=Proizvod::dohvati_sa_id($request->id)[0];
         $proizvod->Cena=$proizvod->Cena*(100-(int)($request->popust))/100;
         $success=$proizvod->save();
         if($success){
