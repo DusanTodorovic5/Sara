@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 /*
  * Klasa predstavlja model Korisnika u bazi podataka. Pored polja iz tabele ova klasa sadrzi 
- * pomocne metode 'checkEmail' i 'checkUsername'.
+ * pomocne metode 'check_email', 'check_username', 'dohvati_sve' i 'dohv_sa_id'.
  */ 
-class KorisnikModel extends Model
+class Korisnik extends Model
 {
     use HasFactory;
 
+    public $timestamps=false;
     protected $table = "korisnik";
     protected $primaryKey = "ID";
-
     protected $fillable = [
         "ID",
         "Username",
@@ -27,13 +27,23 @@ class KorisnikModel extends Model
         "Tip"
     ]; 
     // Metod vraca true u slucaju da ne postoji dati email
-    static function checkEmail($email) {
+    static function check_email($email) {
         // where query->get() vraca listu korisnika sa zadatim emailom, isEmpty vraca true ako je lista prazna
-        return KorisnikModel::where("Email", $email)->get()->isEmpty();
+        return Korisnik::where("Email", $email)->get()->isEmpty();
     }
     // Metod vraca true u slucaju da ne postoji dati username
-    static function checkUsername($username) {
+    static function check_username($username) {
         // where query->get() vraca listu korisnika sa zadatim usernamom, isEmpty vraca true ako je lista prazna
-        return KorisnikModel::where("Username", $username)->get()->isEmpty();
+        return Korisnik::where("Username", $username)->get()->isEmpty();
+    }
+
+    //Staticki metod dohvati_sve sluzi nam za dohvatanje svih korisnika iz baze podataka. 
+    public static function dohvati_sve(){
+        return Korisnik::all();
+    }
+    
+    //Staticki metod dohvati_sa_id sluzi nam za dohvatanje korisnika sa zadatim ID.
+    public static function dohv_sa_id($id){
+        return Korisnik::where('ID',$id)->get();
     }
 }

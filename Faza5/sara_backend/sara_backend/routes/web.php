@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GlavniKontroler;
+use App\Http\Controllers\AdminKontroler;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +43,10 @@ Route::get('/token', function () {
  * 
  */
 Route::post("/registruj", [GlavniKontroler::class, "register_user"]);
+
+Route::get('/pending',[AdminKontroler::class,'pending']);
+Route::post('/pending/true',[AdminKontroler::class,'prihvati_kor']);
+Route::post('/pending/false',[AdminKontroler::class,'odbij_kor']);
+Route::post('/moderator',[AdminKontroler::class,'moderatori']);
+
+Route::get("/korisnici",[AdminKontroler::class,'dohv_korisnike']);
