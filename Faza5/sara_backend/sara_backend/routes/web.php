@@ -21,5 +21,24 @@ Route::get('/', function () {
 Route::get('/token', function () {
     return csrf_token(); 
 });
-
+/*
+ * /registruj ruta prima json zahtev o registraciji sa potrebnim parametrima u vidu
+ * 
+ * {
+ *  "Username" : "username",
+ *  "Password" : "password",
+ *  "Email" : "email",
+ *  "ImeIPrezime" : "ime i prezime",
+ *  "Pol" : "M ili Z",
+ *  "Datum" : "datum rodjenja"
+ * }
+ * 
+ * Vraca json odgovor sa dva parametra sledeceg tipa
+ * 
+ * {
+ *  "Status" : "true ili false u zavisnosti od uspesnosti",
+ *  "Message" : "Obrazlozenje o vracenom zahtevu"
+ * }
+ * 
+ */
 Route::post("/registruj", [GlavniKontroler::class, "register_user"]);
