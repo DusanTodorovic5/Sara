@@ -198,3 +198,19 @@ Route::post('/login_submit',[GlavniKontroler::class,'login_submit'])->name('logi
  * Ruta kojom se vrsi logout korisnika
  */
 Route::get('/logout', [GlavniKontroler::class, "logout"])->name('logout');
+
+/**
+ * Ruta kojom se brise recenzija iz baze
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "id":"id recenzije"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno "
+ * }
+ */
+Route::post('/obrisi_recenziju', [ModeratorKontroler::class, "obrisi_recenziju"]);
