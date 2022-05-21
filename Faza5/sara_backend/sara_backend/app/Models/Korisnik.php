@@ -1,33 +1,41 @@
 <?php
 
+//Ana Maksimovic 0174/2019
+
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-/*
- * Klasa predstavlja model Korisnika u bazi podataka. Pored polja iz tabele ova klasa sadrzi 
- * pomocne metode 'check_email', 'check_username', 'dohvati_sve' i 'dohv_sa_id'.
- */ 
-class Korisnik extends Model
-{
-    use HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
+/*
+ * Klasa Korisnik predstavlja model Korisnika
+ * iz baze, ovo je izmenjena User klasa
+ * iz originalnog koda.
+ * Pored polja iz tabele ova klasa sadrzi
+ * pomocne metode 'check_email', 
+ * 'check_username', 'dohvati_sve' i 'dohv_sa_id'.
+ */
+class Korisnik extends Authenticatable
+{
+    use  HasFactory, Notifiable;
+ 
+    protected $table='korisnik';
+    protected $primaryKey='ID';
     public $timestamps=false;
-    protected $table = "korisnik";
-    protected $primaryKey = "ID";
+
     protected $fillable = [
-        "ID",
-        "Username",
-        "Password",
-        "ImeIPrezime",
-        "Email",
-        "Pol",
-        "Potroseno",
-        "Datum",
-        "Tip"
-    ]; 
-    // Metod vraca true u slucaju da ne postoji dati email
-    static function check_email($email) {
+        'ID', 'Username', 'Password', 'ImeIPrezime', 'Email', 'Pol', 'Potroseno', 'Datum', 'Tip'
+    ];
+    
+    public function getAuthPassword(){
+        return $this->Password;
+    }
+
+     // Metod vraca true u slucaju da ne postoji dati email
+     static function check_email($email) {
         // where query->get() vraca listu korisnika sa zadatim emailom, isEmpty vraca true ako je lista prazna
         return Korisnik::where("Email", $email)->get()->isEmpty();
     }
