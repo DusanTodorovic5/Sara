@@ -133,7 +133,7 @@ Route::get("/korisnici",[AdminKontroler::class,'dohv_korisnike']);
  * 
  * Telo zahteva je json u formatu
  * {
- * "IDProizvoda":"id proizvoda",
+ * "IDProizvod":"id proizvoda",
  * "Text":"text recenzije"
  * }
  * 
