@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GlavniKontroler;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/token', function () {
+    return csrf_token(); 
+});
+
+Route::post("/registruj", [GlavniKontroler::class, "register_user"]);
