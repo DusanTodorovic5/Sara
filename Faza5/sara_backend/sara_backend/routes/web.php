@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GlavniKontroler;
+use App\Http\Controllers\AdminKontroler;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,3 +43,86 @@ Route::get('/token', function () {
  * 
  */
 Route::post("/registruj", [GlavniKontroler::class, "register_user"]);
+
+
+/**
+ * Ruta koja vraca listu korisnika koji cekaju odobrenje.
+ * 
+ * Odgovor je niz json-a u formatu 
+ * {
+ *  "ID":"id",
+ *  "Username" : "username",
+ *  "Password" : "password",
+ *  "Email" : "email",
+ *  "ImeIPrezime" : "ime i prezime",
+ *  "Pol" : "M ili Z",
+ *  "Datum" : "datum rodjenja",
+ *  "Potroseno":"0"
+ * }
+ * 
+ */
+Route::get('/pending',[AdminKontroler::class,'pending']);
+/**
+ * Ruta koja dodaje korisnika 
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "id":"id korisnika iz tabele za odobravanje"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno dodavanje"
+ * }
+ */
+Route::post('/pending/true',[AdminKontroler::class,'prihvati_kor']);
+/**
+ * Ruta koja odbija korisnika 
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "id":"id korisnika iz tabele za odobravanje"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno odbijanje"
+ * }
+ */
+Route::post('/pending/false',[AdminKontroler::class,'odbij_kor']);
+/**
+ * Ruta koja daje/otklanja moderatorska prava pristupa korisniku
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "id":"id korisnika iz tabele za korisnike"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno "
+ * }
+ */
+Route::post('/moderator',[AdminKontroler::class,'moderatori']);
+
+/**
+ * Ruta koja vraca sve korisnike
+ * 
+ * Odgovor je niz json-a u formatu
+ * {
+ *  "ID":"id",
+ *  "Username" : "username",
+ *  "Password" : "password",
+ *  "Email" : "email",
+ *  "ImeIPrezime" : "ime i prezime",
+ *  "Pol" : "M ili Z",
+ *  "Datum" : "datum rodjenja",
+ *  "Potroseno":"0",
+ *  "Tip":"K,M ili A"
+ * }
+ * 
+ */
+Route::get("/korisnici",[AdminKontroler::class,'dohv_korisnike']);

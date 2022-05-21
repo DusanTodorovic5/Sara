@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KorisnikModel;
-use App\Models\OdobravanjeModel;
+use App\Models\Korisnik;
+use App\Models\Odobravanje;
 use Illuminate\Http\Request;
 /*
  * GlavniKontroler je klasa izvedena iz Controller klase, zaduzena za opstu kontrolu sistema
@@ -19,6 +19,6 @@ class GlavniKontroler extends Controller
          * Poziv staticne metode add_new sa parametrom tela zahteva vraca odgovor o uspesnosti
          * registraciju u json obliku koji odmah mozemo proslediti dalje
          */
-        return OdobravanjeModel::add_new($body);
+        return Odobravanje::add_new($body);
     }
 }
