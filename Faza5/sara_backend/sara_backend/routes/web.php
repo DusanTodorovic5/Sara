@@ -3,6 +3,7 @@
 use App\Http\Controllers\GlavniKontroler;
 use App\Http\Controllers\AdminKontroler;
 use App\Http\Controllers\KorisnikKontroler;
+use App\Http\Controllers\ModeratorKontroler;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -144,3 +145,20 @@ Route::get("/korisnici",[AdminKontroler::class,'dohv_korisnike']);
  * }
  */
 Route::post('/recenzija',[KorisnikKontroler::class,'dodaj_recenziju']);
+
+/**
+ * Ruta koja dodaje popust na proizvod
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "id":"id proizvoda",
+ * "popust":"vrednost popusta u procentima"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno "
+ * }
+ */
+Route::post('/popust',[ModeratorKontroler::class,'dodaj_popust']);
