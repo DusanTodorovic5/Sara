@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Proizvod;
+use App\Models\Komentar;
 use Illuminate\Http\Request;
 
 /**
@@ -29,5 +30,30 @@ class ModeratorKontroler extends Controller
      ]);
     }
  }
+    
+ 
+    /*
+    * funkcija koja brise recenziju kojoj 
+    *  odgovara odgovara prosledjeni id
+    *
+    *  @param Request $request Request
+    *
+    * @return Response
+    */
+    public function obrisi_recenziju(Request $request){     
+        $id=$request->id;
+        $pronadjeno=Komentar::find($id);
+        if(!$pronadjeno) {
+            return response()->json([
+                'success'=>false,
+                'reason'=>'Ne postoji recenzija sa tim id'
+            ]);
+        }
+        Komentar::find($id)->delete();
+        return response()->json([
+            'success'=>true,
+            'reason'=>'Obrisana recenzija'
+        ]);
+    }
     
 }
