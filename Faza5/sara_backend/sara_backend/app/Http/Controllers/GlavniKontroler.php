@@ -21,4 +21,37 @@ class GlavniKontroler extends Controller
          */
         return Odobravanje::add_new($body);
     }
+
+     /* 
+    * funkcija koja vraca sve podatke o korisniku 
+    * ukoliko je logovanje bilo uspesno, u suprotnom
+    * vraca false
+    */
+    public function login_submit(Request $request){
+        $this->validate(
+            $request,[
+                'Username' => 'required',
+                'Password' => 'required'
+            ],[
+                'required' => 'Polje :attribute je obavezno'
+            ]
+        );
+
+        if (!auth()->attempt($request->only('Username','Password'))){       
+               return response()->json([
+                'success'=>false,
+            ]);           
+         } 
+
+        return auth()->user();
+    }
+
+    /* funkcija koja odjavljuje korisnika,
+       moderatora ili admina
+    */
+    public function logout()
+    {
+        auth()->logout();
+        
+    }
 }

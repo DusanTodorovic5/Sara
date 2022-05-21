@@ -162,3 +162,39 @@ Route::post('/recenzija',[KorisnikKontroler::class,'dodaj_recenziju']);
  * }
  */
 Route::post('/popust',[ModeratorKontroler::class,'dodaj_popust']);
+
+/**
+ * Ruta kojom se vrsi login korisnika
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "Username":"username korisnika",
+ * "Password":"password korisnika"
+ * 
+ * }
+ * 
+ * Odgovor je json u formatu
+ * za neuspesno logovanje:
+ * {
+ * "success":false
+ * }
+ * za uspesno logovanje:
+ *{
+ *  "ID":"id",
+ *  "Username" : "username",
+ *  "Password" : "password",
+ *  "Email" : "email",
+ *  "ImeIPrezime" : "ime i prezime",
+ *  "Pol" : "M ili Z",
+ *  "Potroseno":"0",
+ *  "Datum" : "datum rodjenja",
+ *  "Tip" :"M ili K ili A"
+ * }
+ * }
+ */
+Route::post('/login_submit',[GlavniKontroler::class,'login_submit'])->name('login_submit');
+
+/*
+ * Ruta kojom se vrsi logout korisnika
+ */
+Route::get('/logout', [GlavniKontroler::class, "logout"])->name('logout');
