@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GlavniKontroler;
 use App\Http\Controllers\AdminKontroler;
+use App\Http\Controllers\KorisnikKontroler;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,3 +127,20 @@ Route::post('/moderator',[AdminKontroler::class,'moderatori']);
  * 
  */
 Route::get("/korisnici",[AdminKontroler::class,'dohv_korisnike']);
+
+/**
+ * Ruta kojom se dodaje recenzija na proivod
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "IDProizvod":"id proizvoda",
+ * "Text":"text recenzije"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno "
+ * }
+ */
+Route::post('/recenzija',[KorisnikKontroler::class,'dodaj_recenziju']);
