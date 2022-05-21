@@ -18,4 +18,12 @@ class Komentar extends Model
     protected $fillable=[
         'Text','Datum','IDKorisnik','IDProizvod'
     ];
+    
+    /*
+    * funkcija koja dohvata komentar
+    * sa zadatim id
+    */
+    public static function dohvati_sa_id($id){
+        return Komentar::where('ID',$id)->get();
+    }
 }
