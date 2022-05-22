@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\WeatherApi;
+use App\Weather\WeatherApi;
 use App\Models\Korisnik;
 use App\Models\Odobravanje;
 use App\Models\Proizvod;

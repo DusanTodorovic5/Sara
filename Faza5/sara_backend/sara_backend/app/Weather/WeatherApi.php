@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http;
+namespace App\Weather;
 
 use App\Models\Korisnik;
 use App\Models\Odobravanje;
 use App\Models\Proizvod;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+
 class WeatherApi
 {
 
@@ -19,8 +20,27 @@ class WeatherApi
         $client = new Client();
         $res = $client->get($url);
 
-        dd($res->getBody()->getContents());
+        $data = (json_decode($res->getBody()->getContents()))->data->timelines[0]->intervals;
+
+        $cloud_cover = 0;
+        $rain_probability = 0;
+        $temperature = 0;
+
+        foreach ($data as $part){
+            $cloud_cover = $cloud_cover + $part->values->cloudCover;
+            $rain_probability = $rain_probability + $part->values->precipitationProbability;
+            $temperature = $temperature + $part->values->temperature;
+        }
+
+
+        return [
+            new Oblacnost($cloud_cover/count($data)),
+            new Kisovito($rain_probability/count($data)),
+            new Temperatura($temperature/count($data))
+        ];
     }
+
+    
 }
 
 
