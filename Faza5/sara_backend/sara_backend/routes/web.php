@@ -214,3 +214,87 @@ Route::get('/logout', [GlavniKontroler::class, "logout"])->name('logout');
  * }
  */
 Route::post('/obrisi_recenziju', [ModeratorKontroler::class, "obrisi_recenziju"]);
+
+/**
+ * Ruta kojom se dodaje proizvod u bazu
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "Naziv" : "naziv",
+ * "Opis" : "opis",
+ * "Putanja" : "putanja",
+ * "Cena" : "cena",
+ * "Sezona" : "sezona",
+ * "Tagovi" : "tagovi",
+ * "godinaOd" : "godinaod",
+ * "godinaDo" : "godinado"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno "
+ * }
+ */
+Route::post('/proizvod',[AdminKontroler::class,'dodaj_proizvod']);
+
+/**
+ * Ruta kojom se kupuje proizvod
+ * 
+ * Telo zahteva je json u formatu
+ *   {
+ *       "proizvodi" : [
+ *           {
+ *               "ID" : "id proizvoda",
+ *               "velicina" : "velicina",
+ *               "kolicina" : "kolicina"
+ *           },
+ *           {
+ *               "ID" : "id proizvoda",
+ *               "velicina" : "velicina",
+ *               "kolicina" : "kolicina"
+ *           }
+ *       ],
+ *       "adresa" : [
+ *           {
+ *           "Ulica" : "ulica",
+ *           "Broj" : "broj",
+ *           "Sprat" : "sprat",
+ *           "BrojStana" : "broj stana",
+ *           "PostanskiBroj" : "postanski broj",
+ *           "Mesto" : "mesto"
+ *           }
+ *       ],       
+ *       "placanje" : "kartica ili pouzecu",
+ *       "kartica" : [
+ *           {
+ *               "BrojKartice" : "broj kartice",
+ *               "CSV" : "csv",
+ *               "DatumIsteka" : "datum isteka"
+ *           }
+ *       ]
+ *   }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno, neuspesno ili delimicno"
+ * }
+ */
+Route::post('/kupi',[KorisnikKontroler::class,'kupi_proizvod']);
+
+/**
+ * Ruta kojom se dodaje proizvod u listu zelja
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "id":"id proizvoda"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "Uspesno ili neuspesno "
+ * }
+ */
+Route::post('/zeli',[KorisnikKontroler::class,'dodaj_u_listu_zelja']);
