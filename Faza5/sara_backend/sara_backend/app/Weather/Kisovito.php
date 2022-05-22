@@ -17,7 +17,7 @@ class Kisovito {
         return $this->tipovi[$this->tip];
     }
 
-    private static $tipovi = ['Pljusak', 'Kisa', 'Vedro'];
+    private $tipovi = ['Pljusak', 'Kisa', 'Vedro'];
     private $tip = 0;
 }
 

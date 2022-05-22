@@ -17,7 +17,7 @@ class Oblacnost {
         return $this->tipovi[$this->tip];
     }
 
-    private static $tipovi = ['Oblacno', 'Mestimicno Oblacno', 'Vedro'];
+    private $tipovi = ['Oblacno', 'Mestimicno Oblacno', 'Vedro'];
     private $tip = 0;
 }
 

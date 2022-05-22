@@ -9,7 +9,7 @@ class Temperatura {
         } else if ($temperatura < 28) {
             $this->tip = 1;
         } else {
-            $this->tip = 0;
+            $this->tip = 2;
         }
     }
 
@@ -17,7 +17,7 @@ class Temperatura {
         return $this->tipovi[$this->tip];
     }
 
-    private static $tipovi = ['Hladno', 'Normalno', 'Toplo'];
+    private $tipovi = ['Hladno', 'Normalno', 'Toplo'];
     private $tip = 0;
 }
 
