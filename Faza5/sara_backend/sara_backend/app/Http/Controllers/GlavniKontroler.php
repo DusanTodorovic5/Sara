@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Korisnik;
 use App\Models\Odobravanje;
+use App\Models\Proizvod;
 use Illuminate\Http\Request;
 /*
  * GlavniKontroler je klasa izvedena iz Controller klase, zaduzena za opstu kontrolu sistema
@@ -53,5 +54,9 @@ class GlavniKontroler extends Controller
     {
         auth()->logout();
         
+    }
+
+    public function filter(Request $request){
+        return Proizvod::filter($request->json()->all());
     }
 }
