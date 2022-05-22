@@ -12,7 +12,7 @@ use App\Models\Komentar;
 use Carbon\Carbon;
 /**
  * Klasa AdminKontroler nam sluzi za administriranje sistema.
- * Sadrzi metode pending, dohv_korisnike, moderatori, prihvati_kor, odbij_kor
+ * Sadrzi metode pending, dohv_korisnike, moderatori, prihvati_kor, odbij_kor, dodaj_proizvod
  */
 class AdminKontroler extends Controller
 {   
@@ -93,4 +93,30 @@ class AdminKontroler extends Controller
          ]);
      }
      }
+
+     //Metod dodaj_proizvod nam sluzi za dodavanje proizvoda iz zahteva
+    public function dodaj_proizvod(Request $request){
+
+        $proizvod = new Proizvod();
+        $proizvod->Naziv=$request->Naziv;
+        $proizvod->Opis=$request->Opis;
+        $proizvod->Putanja=$request->Putanja;
+        $proizvod->Cena=$request->Cena;
+        $proizvod->Sezona=$request->Sezona;
+        $proizvod->Tagovi=$request->Tagovi;
+        $proizvod->godinaOd=$request->godinaOd;
+        $proizvod->godinaDo=$request->godinaDo;
+        $success=$proizvod->save();
+        if($success){
+            return response()->json([
+                'success'=>true,
+                'reason'=>'Uspesno dodavanje proizvoda!'
+            ]);
+        }else{
+            return response()->json([
+                'success'=>false,
+                'reason'=>'Greska pri dodavanju proizvoda!'
+            ]);
+        }
+    }   
 }
