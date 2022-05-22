@@ -184,8 +184,8 @@ class ComposerStaticInit50defc6896ac4a2d49b3b7d2e29faa06
         ),
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Whoops\\' => 
@@ -330,8 +330,8 @@ class ComposerStaticInit50defc6896ac4a2d49b3b7d2e29faa06
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -513,7 +513,11 @@ class ComposerStaticInit50defc6896ac4a2d49b3b7d2e29faa06
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AdminKontroler' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminKontroler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\GlavniKontroler' => __DIR__ . '/../..' . '/app/Http/Controllers/GlavniKontroler.php',
+        'App\\Http\\Controllers\\KorisnikKontroler' => __DIR__ . '/../..' . '/app/Http/Controllers/KorisnikKontroler.php',
+        'App\\Http\\Controllers\\ModeratorKontroler' => __DIR__ . '/../..' . '/app/Http/Controllers/ModeratorKontroler.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -523,11 +527,17 @@ class ComposerStaticInit50defc6896ac4a2d49b3b7d2e29faa06
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
-        'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\Adresa' => __DIR__ . '/../..' . '/app/Models/Adresa.php',
+        'App\\Models\\Kartica' => __DIR__ . '/../..' . '/app/Models/Kartica.php',
+        'App\\Models\\Komentar' => __DIR__ . '/../..' . '/app/Models/Komentar.php',
+        'App\\Models\\Korisnik' => __DIR__ . '/../..' . '/app/Models/Korisnik.php',
+        'App\\Models\\Odobravanje' => __DIR__ . '/../..' . '/app/Models/Odobravanje.php',
+        'App\\Models\\Proizvod' => __DIR__ . '/../..' . '/app/Models/Proizvod.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
+        'App\\Providers\\KorisnikProvider' => __DIR__ . '/../..' . '/app/Providers/KorisnikProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',

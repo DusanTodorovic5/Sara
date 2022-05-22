@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\WeatherApi;
 use App\Models\Korisnik;
 use App\Models\Odobravanje;
 use App\Models\Proizvod;
@@ -56,7 +57,11 @@ class GlavniKontroler extends Controller
         
     }
 
-    public function filter(Request $request){
+    public function filter(Request $request) {
         return Proizvod::filter($request->json()->all());
+    }
+
+    public function preporuka() {
+        return WeatherApi::get_weather("44.787187","20.457273");
     }
 }
