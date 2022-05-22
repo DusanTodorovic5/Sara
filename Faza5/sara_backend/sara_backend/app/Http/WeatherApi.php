@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
 class WeatherApi
 {
 
-    private static $base_url = 'http://api.tomorrow.io/v4/timelines?location=';
+    private static $base_url = 'https://api.tomorrow.io/v4/timelines?location=';
     private static $rest_url = '&fields=temperature,cloudCover,precipitationProbability&timesteps=1d&units=metric&apikey=';
     private static $token = 'X1V61Ix5obs7v3nhdImuEEMalQAYNXbp';
 
@@ -19,7 +19,7 @@ class WeatherApi
         $client = new Client();
         $res = $client->get($url);
 
-        dd($res->getBody());
+        dd($res->getBody()->getContents());
     }
 }
 
