@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 17, 2022 at 12:21 PM
--- Server version: 10.6.5-MariaDB
--- PHP Version: 7.4.26
+-- Generation Time: May 23, 2022 at 06:31 AM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -132,7 +133,16 @@ CREATE TABLE IF NOT EXISTS `odobravanje` (
   `Datum` date NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `Email_UNIQUE` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `odobravanje`
+--
+
+INSERT INTO `odobravanje` (`ID`, `Username`, `Password`, `ImeIPrezime`, `Email`, `Pol`, `Potroseno`, `Datum`) VALUES
+(18, 'ssada', 'asdasd', 'adsdaasd', 'asdad', 'M', 0, '2022-05-10'),
+(19, 'dusan-test', 'jakaSifra', 'Dusan Todorovic', 'moj@email.com', 'M', 0, '2000-06-25'),
+(20, 'dusan-tesst', 'jakaSifra', 'Dusan Todorovic', 'moji@email.com', 'M', 0, '2000-06-25');
 
 -- --------------------------------------------------------
 
@@ -167,8 +177,18 @@ CREATE TABLE IF NOT EXISTS `proizvod` (
   `Tagovi` varchar(45) DEFAULT NULL,
   `godinaOd` int(11) DEFAULT NULL,
   `godinaDo` int(11) DEFAULT NULL,
+  `Pol` char(1) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `proizvod`
+--
+
+INSERT INTO `proizvod` (`ID`, `Naziv`, `Opis`, `Putanja`, `Cena`, `Sezona`, `Tagovi`, `godinaOd`, `godinaDo`, `Pol`) VALUES
+(1, 'Haljina', 'Ovo je haljina', 'putanjica', 1200, 'Leto', 'Leto, Prolece, Cvetno', 15, 55, 'Z'),
+(2, 'Muska Kosulja', 'Muska kosulja', '/muska_kosulja', 999, 'Prolece', 'Prolece, Leto, Prugasto, Crno-Belo', 16, 30, 'M'),
+(3, 'Zenska Kosulja', 'zenska kosuljica', 'zenska_kosulja', 1500, 'Prolece', 'Jednobojna', 20, 40, 'Z');
 
 -- --------------------------------------------------------
 
