@@ -40,7 +40,7 @@ class Proizvod extends Model
         $polovi = $arguments['Pol'];
 
         $tekst = $arguments['Tekst'];
-        
+
         $filter = Proizvod::where(function ($query) use ($cena_od, $cena_do) {
             $query->where('Cena', '>=', $cena_od);
             $query->where('Cena', '<=', $cena_do);
@@ -48,7 +48,7 @@ class Proizvod extends Model
         if (count($kategorije) > 0){
             $filter = $filter->where(function ($query) use ($kategorije){
                 foreach ($kategorije as $kategorija){
-                    $query->orWhere('Tagovi', 'like', '%', $kategorija, '%');
+                    $query->orWhereRaw('Tagovi like "%'.$kategorija.'%"');
                 }
             });
         }
@@ -57,7 +57,7 @@ class Proizvod extends Model
             $filter = $filter->where('Pol', $polovi[0]);
         }
         if ($tekst != null){
-            $filter = $filter->where('Naziv', 'like', '%', $tekst, '%');
+            $filter = $filter->whereRaw('Naziv like "%'.$tekst.'%"');
         }
         
         return $filter->get();
