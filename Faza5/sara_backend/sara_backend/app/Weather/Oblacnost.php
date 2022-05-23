@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Weather;
-
+/*
+ * Klasa koja mapira oblacnost u neki od zadatih stringova
+ */
 class Oblacnost {
     function __construct($oblacnost) {
         if ($oblacnost < 45) {

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Weather;
-
+/*
+ * Klasa koja mapira kisovitost u neki od zadatih stringova
+ */
 class Kisovito {
     function __construct($kisovitost) {
         if ($kisovitost < 55) {

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Weather;
-
+/*
+ * Klasa koja mapira temperaturu u neki od zadatih stringova
+ */
 class Temperatura {
     function __construct($temperatura) {
         if ($temperatura < 12) {

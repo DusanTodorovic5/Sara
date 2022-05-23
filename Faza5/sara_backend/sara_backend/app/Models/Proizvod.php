@@ -31,6 +31,9 @@ class Proizvod extends Model
         return Proizvod::where('ID',$id)->get();
     }
 
+    /*
+     * Staticki metod koji filtrrira proizvode po zadatom argumentu
+     */
     public static function filter($arguments){
         $cena_od = $arguments['Cena'][0];
         $cena_do = $arguments['Cena'][1];
@@ -40,11 +43,12 @@ class Proizvod extends Model
         $polovi = $arguments['Pol'];
 
         $tekst = $arguments['Tekst'];
-
+        // Filtrira proizvod po ceni
         $filter = Proizvod::where(function ($query) use ($cena_od, $cena_do) {
             $query->where('Cena', '>=', $cena_od);
             $query->where('Cena', '<=', $cena_do);
         });
+        // Ako su selektovane neke kategorije, filtrira i po kategorijama
         if (count($kategorije) > 0){
             $filter = $filter->where(function ($query) use ($kategorije){
                 foreach ($kategorije as $kategorija){
@@ -52,14 +56,15 @@ class Proizvod extends Model
                 }
             });
         }
-        
+        // Ako je izabran odredjeni pol, filtrira i po polu
         if (count($polovi) == 1){
             $filter = $filter->where('Pol', $polovi[0]);
         }
+        // U slucaju da je ukucan neki tekst, on ce filtrirati i po tekstu
         if ($tekst != null){
             $filter = $filter->whereRaw('Naziv like "%'.$tekst.'%"');
         }
-        
+        // Vraca json niz filtriranih proizvoda
         return $filter->get();
     }
 }

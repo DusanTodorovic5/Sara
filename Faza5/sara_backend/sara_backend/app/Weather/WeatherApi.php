@@ -7,7 +7,10 @@ use App\Models\Odobravanje;
 use App\Models\Proizvod;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-
+/*
+ * Fasada za upi Tomorrow.io apija, usluzna klasa koja
+ * vraca srednje vremenske uslove za neki period
+ */
 class WeatherApi
 {
 
@@ -17,33 +20,36 @@ class WeatherApi
     private static $tacnost = 5;
 
     static function get_weather($lat, $long) {
+        // Proverava da li je tacnost u dobrom intervalu
         if (WeatherApi::$tacnost > 15) {
             WeatherApi::$tacnost = 15;
         } else if (WeatherApi::$tacnost < 1) {
             WeatherApi::$tacnost = 1;
         }
-        
+        // Stvara api link od lat i long
         $url = WeatherApi::$base_url.$lat.','.$long.WeatherApi::$rest_url.WeatherApi::$token;
+        // Dohvata novog Client-a i salje zahtev
         $client = new Client();
         $res = $client->get($url);
-
+        // Dohvata niz json intervala i uzima WeatherApi::tacnost njih
         $data = (json_decode($res->getBody()->getContents()))->data->timelines[0]->intervals;
         $data = array_slice($data, 0, WeatherApi::$tacnost);
 
+        // Racuna prosecnu vrednost vremenskih uslova
         $cloud_cover = 0;
         $rain_probability = 0;
         $temperature = 0;
-
+        
         foreach ($data as $part){
             $cloud_cover = $cloud_cover + $part->values->cloudCover;
             $rain_probability = $rain_probability + $part->values->precipitationProbability;
             $temperature = $temperature + $part->values->temperature;
         }
-
+        // Stvara objekte klasa koji mapiraju vremenske uslove u string
         $oblacnost = new Oblacnost($cloud_cover/count($data));
         $kisovitost = new Kisovito($rain_probability/count($data));
         $temperatura = new Temperatura($temperature/count($data));
-
+    
         return [
             $oblacnost->oblacnost(),
             $kisovitost->kisovito(),
