@@ -63,13 +63,3 @@ class Proizvod extends Model
         return $filter->get();
     }
 }
-
-/*
-    {
-        Cena: [_od, _do],
-        Kategorija : [kategorije],
-        Pol : [polovi],
-        Tekst : "tekst"
-    }
-
-*/

@@ -298,3 +298,9 @@ Route::post('/kupi',[KorisnikKontroler::class,'kupi_proizvod']);
  * }
  */
 Route::post('/zeli',[KorisnikKontroler::class,'dodaj_u_listu_zelja']);
+
+
+/*
+ * 
+ */
+Route::post('/filter', [GlavniKontroler::class, 'filter']);
