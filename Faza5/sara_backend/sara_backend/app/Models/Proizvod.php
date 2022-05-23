@@ -40,24 +40,26 @@ class Proizvod extends Model
         $polovi = $arguments['Pol'];
 
         $tekst = $arguments['Tekst'];
-
+        
         $filter = Proizvod::where(function ($query) use ($cena_od, $cena_do) {
             $query->where('Cena', '>=', $cena_od);
             $query->where('Cena', '<=', $cena_do);
         });
-
-        $filter = $filter->where(function ($query) use ($kategorije){
-            foreach ($kategorije as $kategorija){
-                $query->orWhere('Tagovi', 'like', '%', $kategorija, '%');
-            }
-        });
-
+        if (count($kategorije) > 0){
+            $filter = $filter->where(function ($query) use ($kategorije){
+                foreach ($kategorije as $kategorija){
+                    $query->orWhere('Tagovi', 'like', '%', $kategorija, '%');
+                }
+            });
+        }
+        
         if (count($polovi) == 1){
             $filter = $filter->where('Pol', $polovi[0]);
         }
-
-        $filter = $filter->where('Naziv', 'like', '%', $tekst, '%');
-
+        if ($tekst != null){
+            $filter = $filter->where('Naziv', 'like', '%', $tekst, '%');
+        }
+        
         return $filter->get();
     }
 }
