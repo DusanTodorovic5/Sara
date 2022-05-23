@@ -4,6 +4,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,5 +54,9 @@ class Korisnik extends Authenticatable
     //Staticki metod dohvati_sa_id sluzi nam za dohvatanje korisnika sa zadatim ID.
     public static function dohv_sa_id($id){
         return Korisnik::where('ID',$id)->get();
+    }
+    // Usluzni metod za dohvatanje starosti Korisnika
+    public function dohvati_godine(){
+        return Carbon::now()->year - (new Carbon($this->Datum))->year; 
     }
 }

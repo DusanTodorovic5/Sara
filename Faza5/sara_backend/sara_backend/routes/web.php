@@ -300,7 +300,22 @@ Route::post('/kupi',[KorisnikKontroler::class,'kupi_proizvod']);
 Route::post('/zeli',[KorisnikKontroler::class,'dodaj_u_listu_zelja']);
 
 
-/*
+/* 
+ * Ruta za filtriranje proizvoda, salje se zahtev u sledecem obliku
  * 
+ * {
+ *  "Pol" : ["Z", "M"],
+ *	"Tekst" : null,
+ *	"Cena" : [500,2200],
+ *	"Kategorija" : ["Prolece", "Jednobojna"]
+ * }
+ * 
+ * Povratna vrednost je json niz Proizvoda
  */
 Route::post('/filter', [GlavniKontroler::class, 'filter']);
+/*
+ * Ruta za preporuku proizvoda, salje se get zahtev sa lat i long parametrima
+ * 
+ * Povratna vrednost je json niz Proizvoda
+ */
+Route::get('/preporuka/{lat},{long}', [GlavniKontroler::class, 'preporuka']);
