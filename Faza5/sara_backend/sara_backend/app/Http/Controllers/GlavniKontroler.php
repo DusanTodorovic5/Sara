@@ -43,7 +43,10 @@ class GlavniKontroler extends Controller
             ]);
         }
 
-        return auth()->user();
+        return response()->json([
+            'success' => true,
+            'korisnik' => auth()->user()
+        ]);
     }
 
     /* funkcija koja odjavljuje korisnika,
