@@ -36,7 +36,9 @@ class GlavniKontroler extends Controller
     */
     public function login_submit(Request $request)
     {
-
+        /*
+        proba
+        */
         if (!auth()->attempt($request->only('Username', 'Password'))) {
             return response()->json([
                 'success' => false,
