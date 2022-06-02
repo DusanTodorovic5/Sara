@@ -27,7 +27,14 @@ use Illuminate\Support\Facades\Mail;
  */
 class KorisnikKontroler extends Controller
 {
-    // Metod dodaj_recenziju nam sluzi za dodavanje recenzije na proizvod iz zahteva
+    /*
+    * funkcija za dodavanje recenzije na prosledjeni proizvod
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
+    */
     public function dodaj_recenziju(Request $request)
     {
 
@@ -50,38 +57,26 @@ class KorisnikKontroler extends Controller
         }
     }
 
-    // Metod dodaj_u_listu_zelja nam sluzi za dodavanje proizvoda u listu zelja
-    public function dodaj_u_listu_zelja(Request $request)
-    {
 
-        if (Auth::check()) {
-            $id_korisnika = auth()->user()->id;
-            $proizvod = Proizvod::dohv_sa_id($request->id)[0];
-            $success = DB::table('zeli')->insert(['IdKorisnika' => $id_korisnika, 'IdProizvoda' => $request->id]);
-            if ($success) {
-                return response()->json([
-                    'success' => true,
-                    'reason' => 'Uspesno dodavanje u listu zelja!'
-                ]);
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'reason' => 'Greska pri dodavanju u listu zelja!'
-                ]);
-            }
-        } else return response()->json([
-            'success' => false,
-            'reason' => 'Korisnik nije ulogovan!'
-        ]);
-    }
-
-    //Metod koji vraca sve proizvode iz baze
+    /*
+    * funkcija za dohvatanje svih proizvoda
+    *
+    * @param Request $request Request
+    *
+    */
     function dohvati_sve_proizvode()
     {
         return Proizvod::all();
     }
 
-    //Metoda koja na osnovu tela zahteva pravi Adresu
+    /*
+    * funkcija zakreiranje adrese
+    *
+    * @param Request $request Request
+    *
+    * @return ID:int
+    *
+    */
     public function napraviAdresu(Request $request)
     {
         $adresa = new Adresa();
@@ -96,7 +91,14 @@ class KorisnikKontroler extends Controller
         return $adresa->ID;
     }
 
-    //Metoda koja na osnovu tela zahteva pravi Karticu
+    /*
+    * funkcija za kreiranje kartice
+    *
+    * @param Request $request Request
+    *
+    * @return ID:int
+    *
+    */
     public function napraviKarticu(Request $request)
     {
 
@@ -126,6 +128,14 @@ class KorisnikKontroler extends Controller
         return $ret;
     }
 
+    /*
+    * funkcija koja dohvata proizvod sa zadatim id
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
+    */
     public function dohvati_proizvod_sa_id(Request $request)
     {
         $id = $request->json()->all()['id'];
@@ -144,7 +154,15 @@ class KorisnikKontroler extends Controller
     }
 
 
-    //Metod kupi_proizvod nam sluzi za pravljnje Porudzbine i pamcenje svih detalja kupovine u tabeli Sadrzi
+    /*
+    * funkcija kupi_proizvod nam sluzi za pravljnje Porudzbine 
+    * i pamcenje svih detalja kupovine u tabeli Sadrzi
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
+    */
     public function kupi_proizvod(Request $request)
     {
 
@@ -180,6 +198,14 @@ class KorisnikKontroler extends Controller
         return $request->proizvodi;
     }
 
+    /*
+    * funkcija koja vraca listu zelja za korisnika
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
+    */
     public function dohvati_listu_zelja(Request $request)
     {
         $idKorisnik = $request->json()->all()['idKorisnik'];
@@ -204,6 +230,14 @@ class KorisnikKontroler extends Controller
         ]);
     }
 
+    /*
+    * funkcija za dodavanje proizvoda u listu zelja
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
+    */
     public function dodaj_u_lz(Request $request)
     {
         $idKorisnik = $request->idKorisnik;
@@ -228,6 +262,15 @@ class KorisnikKontroler extends Controller
         }
     }
 
+    /*
+    * funkcija koja menja polje za obavestavanje o dostupnosti
+    * za proi\vod u listi zelja
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
+    */
     public function promeni_obavestavanje(Request $request)
     {
         $idProizvod = $request->idProizvod;
@@ -251,6 +294,14 @@ class KorisnikKontroler extends Controller
         }
     }
 
+    /*
+    * funkcija za brisanje proizvoda iz liste zelja
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
+    */
     public function obrisi_iz_ls(Request $request)
     {
 
