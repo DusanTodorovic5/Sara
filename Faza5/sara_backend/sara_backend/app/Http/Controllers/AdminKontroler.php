@@ -172,6 +172,14 @@ class AdminKontroler extends Controller
         }
     }
 
+    /*
+    * funkcija za dodavanje velicina za proizvod
+    *
+    * @param Request $request Request
+    *
+    * @return true
+    *
+    */
     public function dodaj_novu_velicinu(Request $request)
     {
         $file = File::get("C:\\wamp64\www\detalji\\" . $request->id . "\\velicine.json");

@@ -30,10 +30,15 @@ class GlavniKontroler extends Controller
         return Odobravanje::add_new($body);
     }
 
-    /* 
+    /*
     * funkcija koja vraca sve podatke o korisniku 
     * ukoliko je logovanje bilo uspesno, u suprotnom
     * vraca false
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    *
     */
     public function login_submit(Request $request)
     {
