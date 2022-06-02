@@ -122,4 +122,58 @@ class KorisnikKontroler extends Controller
         ];
         return $ret;
     }
+
+    public function dohvati_proizvod_sa_id(Request $request)
+    {
+        $id = $request->json()->all()['id'];
+        $pronadjeno = Proizvod::dohvati_sa_id($id);
+        if (!$pronadjeno) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Ne postoji'
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'proizvod' => $pronadjeno
+        ]);
+    }
+
+
+    //Metod kupi_proizvod nam sluzi za pravljnje Porudzbine i pamcenje svih detalja kupovine u tabeli Sadrzi
+    public function kupi_proizvod(Request $request)
+    {
+
+        $idKar = (int)$request->idK;
+        $idAdr = (int)$request->idA;
+
+        if ($request->flag) {
+            $idAdr = KorisnikKontroler::napraviAdresu($request);
+            if ($request->placanje == 'kartica') $idKar = KorisnikKontroler::napraviKarticu($request);
+        }
+
+        foreach ($request->proizvodi as $pro) {
+            $file = File::get("C:\\wamp64\www\detalji\\" . $pro["ID"] . "\\velicine.json");
+
+            $json = json_decode($file, TRUE);
+            $json[$pro['velicina']] = $json[$pro['velicina']] - $pro["kolicina"];
+            File::put("C:\\wamp64\www\detalji\\" . $pro["ID"] . "\\velicine.json", json_encode($json));
+        }
+        $kor = Korisnik::dohv_sa_id((int)$request->idKor)[0];
+        $kor->Potroseno += $request->cena;
+        $kor->save();
+
+        $porudzbina = new Porudzbina();
+        $porudzbina->IDAdresa = $idAdr;
+        if ($request->placanje == 'kartica') {
+            $porudzbina->IDKartica = $idKar;
+        } else {
+            $porudzbina->IDKartica = null;
+        }
+
+        $porudzbina->save();
+
+        return $request->proizvodi;
+    }
 }

@@ -119,4 +119,73 @@ class AdminKontroler extends Controller
             ]);
         }
     }
+
+    //Metod dodaj_proizvod nam sluzi za dodavanje proizvoda iz zahteva
+    public function dodaj_proizvod(Request $request)
+    {
+
+        $proizvod = new Proizvod();
+        $proizvod->Naziv = $request->Naziv; //
+        $proizvod->Opis = $request->Opis; //
+        $proizvod->Cena = $request->Cena; //
+        $proizvod->Sezona = $request->Sezona; //
+        $proizvod->Tagovi = $request->Tagovi; //
+        $interval = explode("-", $request->Interval);
+
+        $proizvod->godinaOd = $interval[0];
+        $proizvod->godinaDo = $interval[1];
+        $proizvod->Popust = 0; //
+        $proizvod->Pol = $request->Pol;
+
+        $success = $proizvod->save();
+        $proizvod->Putanja = $proizvod->ID;
+        $proizvod->save();
+
+        File::makeDirectory("C:\wamp64\www\detalji\\" . $proizvod->ID, 0777, true, true);
+
+        $image1 = base64_decode($request->slika1);
+        $image2 = base64_decode($request->slika2);
+        $image3 = base64_decode($request->slika3);
+        $tmp = File::put("C:\\wamp64\www\detalji\\" . $proizvod->ID . "\\s1.png", $image1);
+        $tmp = File::put("C:\\wamp64\www\detalji\\" . $proizvod->ID . "\\s2.png", $image2);
+        $tmp = File::put("C:\\wamp64\www\detalji\\" . $proizvod->ID . "\\s3.png", $image3);
+        $data = [
+            "S" => "0",
+            "XL" => "0",
+            "L" => "0",
+            "M" => "0",
+            "XXL" => "0",
+        ];
+
+        $data[$request->Velicina] = $request->Kolicina;
+        File::put("C:\\wamp64\www\detalji\\" . $proizvod->ID . "\\velicine.json", json_encode($data));
+        if ($success) {
+            return response()->json([
+                'success' => true,
+                'reason' => 'Uspesno dodavanje proizvoda!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Greska pri dodavanju proizvoda!'
+            ]);
+        }
+    }
+
+    public function dodaj_novu_velicinu(Request $request)
+    {
+        $file = File::get("C:\\wamp64\www\detalji\\" . $request->id . "\\velicine.json");
+
+        $json = json_decode($file, TRUE);
+        //return $json;
+        if (!array_key_exists($request->velicina, $json)) {
+            $json[$request->velicina] = $request->kolicina;
+        } else {
+            $json[$request->velicina] = (string)($json[$request->velicina] + $request->kolicina);
+        }
+        File::put("C:\\wamp64\www\detalji\\" . $request->id . "\\velicine.json", json_encode($json));
+
+        AdminKontroler::basic_email($request->id);
+        return true;
+    }
 }
