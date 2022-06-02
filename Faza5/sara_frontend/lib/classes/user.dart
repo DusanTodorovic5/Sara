@@ -1,3 +1,4 @@
+//AUTHOR: Janko Tufegdzic
 class User {
   int id;
   String username;
