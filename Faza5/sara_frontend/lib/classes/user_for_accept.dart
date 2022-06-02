@@ -1,3 +1,4 @@
+//AUTHOR: Janko Tufegdzic
 import 'package:flutter/foundation.dart';
 
 class UserForAcceptance {
