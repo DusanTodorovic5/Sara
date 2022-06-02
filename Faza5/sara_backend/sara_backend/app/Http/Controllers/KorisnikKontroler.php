@@ -81,6 +81,7 @@ class KorisnikKontroler extends Controller
         return Proizvod::all();
     }
 
+    //Metoda koja na osnovu tela zahteva pravi Adresu
     public function napraviAdresu(Request $request)
     {
         $adresa = new Adresa();
@@ -94,7 +95,8 @@ class KorisnikKontroler extends Controller
         $adresa->save();
         return $adresa->ID;
     }
-
+    
+    //Metoda koja na osnovu tela zahteva pravi Karticu
     public function napraviKarticu(Request $request)
     {
 
@@ -107,7 +109,8 @@ class KorisnikKontroler extends Controller
 
         return $kartica->ID;
     }
-
+    
+    //Metoda koja dohvata podatke o korisniku na osnovu id-ja koji je prosledjen kroz telo
     public function dohvati_podatke(Request $request)
     {
         $kartica = Kartica::dohv_za_korisnika($request->id)->first();
