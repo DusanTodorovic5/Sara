@@ -95,7 +95,7 @@ class KorisnikKontroler extends Controller
         $adresa->save();
         return $adresa->ID;
     }
-    
+
     //Metoda koja na osnovu tela zahteva pravi Karticu
     public function napraviKarticu(Request $request)
     {
@@ -109,7 +109,7 @@ class KorisnikKontroler extends Controller
 
         return $kartica->ID;
     }
-    
+
     //Metoda koja dohvata podatke o korisniku na osnovu id-ja koji je prosledjen kroz telo
     public function dohvati_podatke(Request $request)
     {
@@ -178,5 +178,96 @@ class KorisnikKontroler extends Controller
         $porudzbina->save();
 
         return $request->proizvodi;
+    }
+
+    public function dohvati_listu_zelja(Request $request)
+    {
+        $idKorisnik = $request->json()->all()['idKorisnik'];
+        $pronadjeno = ListaZelja::dohvati_sa_idKorisnika($idKorisnik);
+
+        if (!$pronadjeno) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Ne postoji'
+            ]);
+        }
+        foreach ($pronadjeno as $element) {
+            $id = $element->IdProizvoda;
+            $proizvod = Proizvod::dohvati_sa_id($id);
+            $uname = $proizvod->Naziv;
+            $element->naziv = $uname;
+        }
+
+        return response()->json([
+            'success' => true,
+            'list' => $pronadjeno
+        ]);
+    }
+
+    public function dodaj_u_lz(Request $request)
+    {
+        $idKorisnik = $request->idKorisnik;
+        $idProizvod = $request->idProizvod;
+
+
+        $zeli = new ListaZelja();
+        $zeli->IdProizvoda = $idProizvod;
+        $zeli->IdKorisnika = $idKorisnik;
+        $zeli->Obavesti = 'N';
+        $success = $zeli->save();
+        if ($success) {
+            return response()->json([
+                'success' => true,
+                'reason' => 'Uspesno dodavanje u listu zelja!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Greska pri dodavanju u listu zelja!'
+            ]);
+        }
+    }
+
+    public function promeni_obavestavanje(Request $request)
+    {
+        $idProizvod = $request->idProizvod;
+        $idKorisnik = $request->idKorisnik;
+
+        $zeli = ListaZelja::dohv($idProizvod, $idKorisnik)->first();
+        $polje = 'D';
+        if ($zeli->Obavesti == 'D') $polje = 'N';
+
+        $success = ListaZelja::azuriraj_polje($idProizvod, $idKorisnik, $polje);
+        if ($success) {
+            return response()->json([
+                'success' => true,
+                'reason' => 'Uspesno promenjeno!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Greska!'
+            ]);
+        }
+    }
+
+    public function obrisi_iz_ls(Request $request)
+    {
+
+        $idProizvod = $request->idProizvod;
+        $idKorisnik = $request->idKorisnik;
+
+        $pronadjeno = ListaZelja::find($idKorisnik);
+        if (!$pronadjeno) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Ne postoji'
+            ]);
+        }
+        ListaZelja::obrisi($idProizvod, $idKorisnik);
+        return response()->json([
+            'success' => true,
+            'reason' => 'Obrisano iz liste zelja'
+        ]);
     }
 }

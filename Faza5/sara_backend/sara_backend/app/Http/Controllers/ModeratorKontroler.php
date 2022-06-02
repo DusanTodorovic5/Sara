@@ -58,4 +58,48 @@ class ModeratorKontroler extends Controller
             'reason' => 'Obrisana recenzija'
         ]);
     }
+
+
+    public function dohvati_sve_recenzije(Request $request)
+    {
+        $idProizvod = $request->idProizvod;
+        $pronadjeno = Komentar::dohvati_sa_IDProizvod($idProizvod);
+
+        if (!$pronadjeno) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Ne postoji'
+            ]);
+        }
+
+        foreach ($pronadjeno as $element) {
+            $idK = $element->IDKorisnik;
+            $korisnik = Korisnik::dohv_sa_id($idK);
+            $uname = $korisnik[0]->Username;
+            $element->username = $uname;
+        }
+
+        return response()->json([
+            'success' => true,
+            'list' => $pronadjeno,
+
+        ]);
+    }
+
+    public function dohvati_korisnika(Request $request)
+    {
+        $id = $request->id;
+        $pronadjeno = Korisnik::dohv_sa_id($id);
+        if (!$pronadjeno) {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Ne postoji'
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'korisnik' => $pronadjeno
+        ]);
+    }
 }
