@@ -72,4 +72,51 @@ class AdminKontroler extends Controller
         );
         dd($result);
     }
+    //Metod prihvati_kor dodaje korisnika u bazu
+    public function prihvati_kor(Request $request)
+    {
+        $korisnik = Odobravanje::dohvati_sa_id($request->id)[0];
+        Odobravanje::obrisi_sa_id($request->id);
+
+        $user = new Korisnik;
+
+        $user->Username = $korisnik->Username;
+        $user->Password = $korisnik->Password;
+        $user->ImeIPrezime = $korisnik->ImeIPrezime;
+        $user->Tip = 'K';
+        $user->Pol = $korisnik->Pol;
+        $user->Datum = $korisnik->Datum;
+        $user->Email = $korisnik->Email;
+        $user->Potroseno = $korisnik->Potroseno;
+        $success = $user->save();
+
+        if ($success) {
+            return response()->json([
+                'success' => true,
+                'reason' => 'Uspesno prihvatanje korisnika!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Greska pri prihvatanju korisnika!'
+            ]);
+        }
+    }
+
+    // Metod odbij_kor uklanja korisnika iz tabele za odobravanje 
+    public function odbij_kor(Request $request)
+    {
+        $success = Odobravanje::obrisi_sa_id($request->id);
+        if ($success) {
+            return response()->json([
+                'success' => true,
+                'reason' => 'Uspesno odbijanje korisnika!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'reason' => 'Greska pri odbijanju korisnika!'
+            ]);
+        }
+    }
 }

@@ -80,4 +80,46 @@ class KorisnikKontroler extends Controller
     {
         return Proizvod::all();
     }
+
+    public function napraviAdresu(Request $request)
+    {
+        $adresa = new Adresa();
+        $adresa->IdKorisnik = (int)$request->idKor;
+        $adresa->Mesto = $request->adresa['Mesto'];
+        $adresa->PostanskiBroj = (int)$request->adresa['PostanskiBroj'];
+        $adresa->Ulica = $request->adresa['Ulica'];
+        $adresa->Broj = (int)$request->adresa['Broj'];
+        if ($request->adresa['Sprat'] != "") $adresa->Sprat = (int)$request->adresa['Sprat'];
+        if ($request->adresa['BrojStana'] != "") $adresa->Sprat = (int)$request->adresa['BrojStana'];
+        $adresa->save();
+        return $adresa->ID;
+    }
+
+    public function napraviKarticu(Request $request)
+    {
+
+        $kartica = new Kartica();
+        $kartica->Broj = $request->kartica["BrojKartice"];
+        $kartica->CSV = (int)$request->kartica["CSV"];
+        $kartica->DatumIsteka = Carbon::createFromFormat('Y-m-d', $request->kartica['DatumIsteka']);
+        $kartica->idKorisnik = (int)($request->idKor);
+        $kartica->save();
+
+        return $kartica->ID;
+    }
+
+    public function dohvati_podatke(Request $request)
+    {
+        $kartica = Kartica::dohv_za_korisnika($request->id)->first();
+        $adresa = Adresa::dohv_za_korisnika($request->id)->first();
+        $kor = DB::table('Korisnik')->where('ID', $request->id)->first();
+        if ($kor == null) $ime = null;
+        else $ime = $kor->ImeIPrezime;
+        $ret = [
+            'ime' => $ime,
+            'adresa' => $adresa,
+            'kartica' => $kartica
+        ];
+        return $ret;
+    }
 }
