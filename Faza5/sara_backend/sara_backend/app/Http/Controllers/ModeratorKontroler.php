@@ -14,7 +14,15 @@ use Illuminate\Http\Request;
  */
 class ModeratorKontroler extends Controller
 {
-    // Metoda dodaj_popust dodaje popust na artikal koji smo prosledili kroz telo zahteva
+
+    /*
+    * funkcija dodaje popust na artikal koji smo prosledili 
+    * kroz telo zahteva
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    */
     public function dodaj_popust(Request $request)
     {
         $proizvod = Proizvod::dohvati_sa_id($request->id)[0];
@@ -60,6 +68,14 @@ class ModeratorKontroler extends Controller
     }
 
 
+    /*
+    * funkcija koja dohvata sve recenzije
+    * za zadati id proizvoda
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    */
     public function dohvati_sve_recenzije(Request $request)
     {
         $idProizvod = $request->idProizvod;
@@ -86,6 +102,14 @@ class ModeratorKontroler extends Controller
         ]);
     }
 
+    /*
+    * funkcija koja vraca Korisnika
+    * sa zadatim id
+    *
+    * @param Request $request Request
+    *
+    * @return Response
+    */
     public function dohvati_korisnika(Request $request)
     {
         $id = $request->id;
