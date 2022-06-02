@@ -27,7 +27,9 @@ class Komentar extends Model
     {
         return Komentar::where('ID', $id)->get();
     }
-    
+    /*
+     * Metod za dohvatanje komentara za proizvod sa zadatim id
+     */
     public static function dohvati_sa_IDProizvod($id)
     {
         return Komentar::where('IDProizvod', $id)->get();
