@@ -185,13 +185,7 @@ class KorisnikKontroler extends Controller
             File::put("C:\\wamp64\www\detalji\\" . $pro["ID"] . "\\velicine.json", json_encode($json));
         }
         $kor = Korisnik::dohv_sa_id((int)$request->idKor)[0];
-        if ($kor->Potroseno >= 50000) {
-            $kor->Potroseno += $request->cena * 0.8;
-        } else if ($kor->Potroseno >= 10000 && $kor->Potroseno < 50000) {
-            $kor->Potroseno += $request->cena * 0.9;
-        } else {
-            $kor->Potroseno += $request->cena;
-        }
+        $kor->Potroseno += $request->cena;
         $kor->save();
 
         $porudzbina = new Porudzbina();
