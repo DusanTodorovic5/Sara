@@ -25,11 +25,12 @@ class Adresa extends Model
         return Adresa::all();
     }
 
-
+    //Metoda koja pronalazi adresu sa zadatim id
     public static function dohv_za_korisnika($id)
     {
         return Adresa::where('IdKorisnik', $id);
     }
+
     //Metoda koja dohvata adresu sa zadatim id
     public static function dohv_sa_id($id)
     {

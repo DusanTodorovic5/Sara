@@ -16,7 +16,7 @@ use Mailgun\Mailgun;
 
 /**
  * Klasa AdminKontroler nam sluzi za administriranje sistema.
- * Sadrzi metode pending, dohv_korisnike, moderatori, prihvati_kor, odbij_kor, dodaj_proizvod
+ * Sadrzi metode pending, dohv_korisnike, moderatori, prihvati_kor, odbij_kor, dodaj_proizvod, dodaj_novu_velicinu
  */
 class AdminKontroler extends Controller
 {
@@ -72,6 +72,7 @@ class AdminKontroler extends Controller
         );
         dd($result);
     }
+
     //Metod prihvati_kor dodaje korisnika u bazu
     public function prihvati_kor(Request $request)
     {
@@ -125,16 +126,16 @@ class AdminKontroler extends Controller
     {
 
         $proizvod = new Proizvod();
-        $proizvod->Naziv = $request->Naziv; //
-        $proizvod->Opis = $request->Opis; //
-        $proizvod->Cena = $request->Cena; //
-        $proizvod->Sezona = $request->Sezona; //
-        $proizvod->Tagovi = $request->Tagovi; //
+        $proizvod->Naziv = $request->Naziv;
+        $proizvod->Opis = $request->Opis;
+        $proizvod->Cena = $request->Cena;
+        $proizvod->Sezona = $request->Sezona;
+        $proizvod->Tagovi = $request->Tagovi;
         $interval = explode("-", $request->Interval);
 
         $proizvod->godinaOd = $interval[0];
         $proizvod->godinaDo = $interval[1];
-        $proizvod->Popust = 0; //
+        $proizvod->Popust = 0;
         $proizvod->Pol = $request->Pol;
 
         $success = $proizvod->save();

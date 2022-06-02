@@ -222,14 +222,18 @@ Route::post('/obrisi_recenziju', [ModeratorKontroler::class, "obrisi_recenziju"]
  * 
  * Telo zahteva je json u formatu
  * {
- * "Naziv" : "naziv",
- * "Opis" : "opis",
- * "Putanja" : "putanja",
- * "Cena" : "cena",
- * "Sezona" : "sezona",
- * "Tagovi" : "tagovi",
- * "godinaOd" : "godinaod",
- * "godinaDo" : "godinado"
+ *         'Naziv': nazivController.text,
+ *         'Opis': 'opis',
+ *         'Cena': 'cena',
+ *         'Sezona': 'sezona',
+ *         'Tagovi': 'tagovi',
+ *         'Pol': 'pol',
+ *         'Velicina': 'velicina',
+ *         'Kolicina': 'kolicina',
+ *         'Interval': interval,
+ *         'slika1': 'slika',
+ *         'slika2': 'slika',
+ *         'slika3': 'slika',
  * }
  * 
  * Odgovor je json u formatu
@@ -244,43 +248,26 @@ Route::post('/proizvod', [AdminKontroler::class, 'dodaj_proizvod']);
  * Ruta kojom se kupuje proizvod
  * 
  * Telo zahteva je json u formatu
- *   {
- *       "proizvodi" : [
- *           {
- *               "ID" : "id proizvoda",
- *               "velicina" : "velicina",
- *               "kolicina" : "kolicina"
- *           },
- *           {
- *               "ID" : "id proizvoda",
- *               "velicina" : "velicina",
- *               "kolicina" : "kolicina"
- *           }
- *       ],
- *       "adresa" : [
- *           {
- *           "Ulica" : "ulica",
- *           "Broj" : "broj",
- *           "Sprat" : "sprat",
- *           "BrojStana" : "broj stana",
- *           "PostanskiBroj" : "postanski broj",
- *           "Mesto" : "mesto"
- *           }
- *       ],       
- *       "placanje" : "kartica ili pouzecu",
- *       "kartica" : [
- *           {
- *               "BrojKartice" : "broj kartice",
- *               "CSV" : "csv",
- *               "DatumIsteka" : "datum isteka"
- *           }
- *       ]
- *   }
- * 
- * Odgovor je json u formatu
  * {
- * "success":true ili false,
- * "reason": "Uspesno, neuspesno ili delimicno"
+ *       "idKor": "idKorisnika",
+ *        "proizvodi": "proizvodi"
+ *        "adresa": {
+ *           "Ulica":"ulica",
+ *           "Broj": "broj",
+ *           "Sprat": "sprat",
+ *           "BrojStana": "broj stana",
+ *           "PostanskiBroj": "postanski broj",
+ *           "Mesto": "mesto,
+ *         },
+ *         "flag": "flag",
+ *         "placanje": "nacinPlacanja",
+ *         "kartica": {
+ *           "BrojKartice": "broj kartice",
+ *           "CSV": "csv",
+ *           "DatumIsteka": "datum isteka",
+ *         },
+ *         "idA": "idAdrese",
+ *         "idK": "idKartice",
  * }
  */
 Route::post('/kupi', [KorisnikKontroler::class, 'kupi_proizvod']);
@@ -334,6 +321,14 @@ Route::post('/preporuka', [GlavniKontroler::class, 'preporuka']);
 Route::get('/proizvodi', [KorisnikKontroler::class, 'dohvati_sve_proizvode']);
 
 
+/*
+ * Ruta za dodavanje velicine
+ * {
+ *  "id" : "id proizvoda",
+ *  "velicina" : "velicina",
+ *  "kolicina" : "kolicina"
+ * }
+ */
 Route::post('/dodajVelicinu', [AdminKontroler::class, 'dodaj_novu_velicinu']);
 
 /*
@@ -350,12 +345,30 @@ Route::post('/dodajVelicinu', [AdminKontroler::class, 'dodaj_novu_velicinu']);
  */
 Route::post('/dohvati_sve_recenzije', [ModeratorKontroler::class, 'dohvati_sve_recenzije']);
 
+
 Route::post('/dohvati_korisnika', [ModeratorKontroler::class, 'dohvati_korisnika']);
 
+/**
+ * Ruta kojom se dohvata proizvod
+ * 
+ * Telo zahteva je json u formatu
+ * {
+ * "id":"id proizvoda"
+ * }
+ * 
+ * Odgovor je json u formatu
+ * {
+ * "success":false,
+ * "reason": "Ne postoji!"
+ * }
+ * ili
+ * {
+ * "success":true,
+ * "proizvod":"proizvod"
+ * }
+ */
 Route::post('/dohvati_proizvod_sa_id', [KorisnikKontroler::class, 'dohvati_proizvod_sa_id']);
-Route::get('/ime', [KorisnikKontroler::class, 'dohvati_ime']);
-Route::get('/adresa', [KorisnikKontroler::class, 'dohvati_adresu']);
-Route::get('/kartica', [KorisnikKontroler::class, 'dohvati_karticu']);
+
 /**
  *Ruta koja dohvata podatke o kojim se popunjavaju polje u frontendu
  *
