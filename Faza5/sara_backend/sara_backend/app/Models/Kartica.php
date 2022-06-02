@@ -30,7 +30,8 @@ class Kartica extends Model
     {
         return Kartica::where('ID', $id)->get();
     }
-
+    
+    //Metoda za dohvatanje kartice ciji je id korisnika zadat
     public static function dohv_za_korisnika($id)
     {
         return Kartica::where('IdKorisnik', $id);
