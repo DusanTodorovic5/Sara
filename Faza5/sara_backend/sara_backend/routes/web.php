@@ -334,6 +334,18 @@ Route::get('/proizvodi', [KorisnikKontroler::class, 'dohvati_sve_proizvode']);
 
 Route::post('/dodajVelicinu', [AdminKontroler::class, 'dodaj_novu_velicinu']);
 
+/*
+ * Ruta za dohvatanje svih recenzija
+ * {
+ *  "idProizvod" : "idProizvnod"
+ * }
+ * 
+ *  Odgovor je json u formatu
+ * {
+ * "success":true,
+ * "list": "lista recenzija"
+ * }
+ */
 Route::post('/dohvati_sve_recenzije', [ModeratorKontroler::class, 'dohvati_sve_recenzije']);
 
 Route::post('/dohvati_korisnika', [ModeratorKontroler::class, 'dohvati_korisnika']);
@@ -364,11 +376,64 @@ Route::get('/kartica', [KorisnikKontroler::class, 'dohvati_karticu']);
  */
 
 Route::post('/dohvatiPodatke', [KorisnikKontroler::class, 'dohvati_podatke']);
+
+
+/*
+ * Ruta za dohvatanje liste zelja zadatog korisnika
+ * {
+ *  "idKorisnik" : "idKorisnik"
+ * }
+ * 
+ *  Odgovor je json u formatu
+ * {
+ * "success":true,
+ * "list": "lista proizvoda koji su u listi zelja"
+ * }
+ */
 Route::post('/zeli_sa_id', [KorisnikKontroler::class, 'dohvati_listu_zelja']);
 
+
+/*
+ * Ruta za dodavanje u listu zelja
+ * {
+ *  "idKorisnik" : "idKorisnik",
+ *  "idProizvod" : "idProizvnod"
+ * }
+ * 
+ *  Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "uspesno ili ne"
+ * }
+ */
 Route::post('/dodaj_u_lz', [KorisnikKontroler::class, 'dodaj_u_lz']);
 
-
+/*
+ * Ruta za promenu obavestavanja za proizvod iz liste zelja
+ * {
+ *  "idKorisnik" : "idKorisnik",
+ *  "idProizvod" : "idProizvnod"
+ * }
+ * 
+ *  Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "uspesno ili ne"
+ * }
+ */
 Route::post('/promeni_obavestavanje', [KorisnikKontroler::class, 'promeni_obavestavanje']);
 
+/*
+ * Ruta za brisanje iz liste zelja
+ * {
+ *  "idKorisnik" : "idKorisnik",
+ *  "idProizvod" : "idProizvnod"
+ * }
+ * 
+ *  Odgovor je json u formatu
+ * {
+ * "success":true ili false,
+ * "reason": "uspesno ili ne"
+ * }
+ */
 Route::post('/obrisi_iz_ls', [KorisnikKontroler::class, 'obrisi_iz_ls']);
