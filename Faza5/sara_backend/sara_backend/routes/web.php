@@ -342,7 +342,27 @@ Route::post('/dohvati_proizvod_sa_id', [KorisnikKontroler::class, 'dohvati_proiz
 Route::get('/ime', [KorisnikKontroler::class, 'dohvati_ime']);
 Route::get('/adresa', [KorisnikKontroler::class, 'dohvati_adresu']);
 Route::get('/kartica', [KorisnikKontroler::class, 'dohvati_karticu']);
-//Kupovina
+/**
+ *Ruta koja dohvata podatke o kojim se popunjavaju polje u frontendu
+ *
+ * Telo zahteva je oblika
+ *{
+ *  'id':'idKorisnika'
+ *}
+ *Telo odgovora je oblika
+ *{'ime':'ime korisnika',
+ * 'adresa':{ 'Ulica':'ulica',
+ *          'Broj':'broj',
+ *          'Sprat':'sprat',
+ *          'BrojStana':'brojstana',
+ *        },
+ * 'kartica':{'Broj':'brojkartice',
+ *            'CSV':'csv',
+ *            'DatumIsteka':'datumIsteka'
+ *          }
+ *}
+ */
+
 Route::post('/dohvatiPodatke', [KorisnikKontroler::class, 'dohvati_podatke']);
 Route::post('/zeli_sa_id', [KorisnikKontroler::class, 'dohvati_listu_zelja']);
 
