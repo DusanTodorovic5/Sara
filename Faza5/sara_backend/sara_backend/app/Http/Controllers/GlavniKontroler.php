@@ -9,6 +9,7 @@ use App\Models\Proizvod;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /*
  * GlavniKontroler je klasa izvedena iz Controller klase, zaduzena za opstu kontrolu sistema
@@ -43,7 +44,12 @@ class GlavniKontroler extends Controller
             ]);
         }
 
-        return auth()->user();
+        $user = Korisnik::where('Username', $request->Username)->first();
+
+        return response()->json([
+            'success' => true,
+            'korisnik' => $user,
+        ]);
     }
 
     /* funkcija koja odjavljuje korisnika,
@@ -70,10 +76,13 @@ class GlavniKontroler extends Controller
      * 
      * U slucaju da metoda ne nadje odgovarajuce proizvode, vraca nasumicnih 6 elemenata iz tabele proizvoda
      */
-    public function preporuka($lat, $long)
+    public function preporuka(Request $request)
     {
+        $lat = $request->json()->all()['lat'];
+        $long = $request->json()->all()['long'];
         // Dohvata vreme sa API-ka
-        $vreme = WeatherApi::get_weather($lat, $long);
+        $vreme = "Vedro"; // U slucaju da api prestane
+        //$vreme = WeatherApi::get_weather($lat, $long);
         // Generise godisnje doba u zavisnosti od vremenskih uslova
         $doba = "Prolece";
         if (($vreme[0] == "Mestimicno Oblacno" || $vreme[0] == "Vedro") &&
@@ -98,8 +107,9 @@ class GlavniKontroler extends Controller
          */
         $query = Proizvod::whereRaw('Tagovi like "%' . $doba . '%"');
         // Ako je korisnik prijavljen, filtrirace po njegovom kriterijumu
-        if (Auth::check()) {
-            $kor = Korisnik::dohv_sa_id(Auth::user()->id);
+
+        if (auth()->attempt($request->only('Username', 'Password'))) {
+            $kor = Korisnik::dohv_sa_id(Auth::user()->ID)[0];
 
             $godine = $kor->dohvati_godine();
 
@@ -112,9 +122,10 @@ class GlavniKontroler extends Controller
         }
         // Dohvata upit
         $result = $query->get();
-        // Ako je upit prazan, nacice 6 nasumicnih proizvoda
+
+        // Ako je upit prazan, naci ce 6 nasumicnih proizvoda
         if (count($result) < 1) {
-            $result = Proizvod::all()->array;
+            $result = Proizvod::all()->toArray();
             shuffle($result);
             $result = array_slice($result, 0, 6);
         }

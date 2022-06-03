@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/token', function () {
-    return csrf_token(); 
+    return csrf_token();
 });
 /*
  * /registruj ruta prima json zahtev o registraciji sa potrebnim parametrima u vidu
@@ -63,7 +63,7 @@ Route::post("/registruj", [GlavniKontroler::class, "register_user"]);
  * }
  * 
  */
-Route::get('/pending',[AdminKontroler::class,'pending']);
+Route::get('/pending', [AdminKontroler::class, 'pending']);
 /**
  * Ruta koja dodaje korisnika 
  * 
@@ -78,7 +78,7 @@ Route::get('/pending',[AdminKontroler::class,'pending']);
  * "reason": "Uspesno ili neuspesno dodavanje"
  * }
  */
-Route::post('/pending/true',[AdminKontroler::class,'prihvati_kor']);
+Route::post('/pending/true', [AdminKontroler::class, 'prihvati_kor']);
 /**
  * Ruta koja odbija korisnika 
  * 
@@ -93,7 +93,7 @@ Route::post('/pending/true',[AdminKontroler::class,'prihvati_kor']);
  * "reason": "Uspesno ili neuspesno odbijanje"
  * }
  */
-Route::post('/pending/false',[AdminKontroler::class,'odbij_kor']);
+Route::post('/pending/false', [AdminKontroler::class, 'odbij_kor']);
 /**
  * Ruta koja daje/otklanja moderatorska prava pristupa korisniku
  * 
@@ -108,7 +108,7 @@ Route::post('/pending/false',[AdminKontroler::class,'odbij_kor']);
  * "reason": "Uspesno ili neuspesno "
  * }
  */
-Route::post('/moderator',[AdminKontroler::class,'moderatori']);
+Route::post('/moderator', [AdminKontroler::class, 'moderatori']);
 
 /**
  * Ruta koja vraca sve korisnike
@@ -127,7 +127,7 @@ Route::post('/moderator',[AdminKontroler::class,'moderatori']);
  * }
  * 
  */
-Route::get("/korisnici",[AdminKontroler::class,'dohv_korisnike']);
+Route::get("/korisnici", [AdminKontroler::class, 'dohv_korisnike']);
 
 /**
  * Ruta kojom se dodaje recenzija na proivod
@@ -144,7 +144,7 @@ Route::get("/korisnici",[AdminKontroler::class,'dohv_korisnike']);
  * "reason": "Uspesno ili neuspesno "
  * }
  */
-Route::post('/recenzija',[KorisnikKontroler::class,'dodaj_recenziju']);
+Route::post('/recenzija', [KorisnikKontroler::class, 'dodaj_recenziju']);
 
 /**
  * Ruta koja dodaje popust na proizvod
@@ -161,7 +161,7 @@ Route::post('/recenzija',[KorisnikKontroler::class,'dodaj_recenziju']);
  * "reason": "Uspesno ili neuspesno "
  * }
  */
-Route::post('/popust',[ModeratorKontroler::class,'dodaj_popust']);
+Route::post('/popust', [ModeratorKontroler::class, 'dodaj_popust']);
 
 /**
  * Ruta kojom se vrsi login korisnika
@@ -192,7 +192,7 @@ Route::post('/popust',[ModeratorKontroler::class,'dodaj_popust']);
  * }
  * }
  */
-Route::post('/login_submit',[GlavniKontroler::class,'login_submit'])->name('login_submit');
+Route::post('/login_submit', [GlavniKontroler::class, 'login_submit'])->name('login_submit');
 
 /*
  * Ruta kojom se vrsi logout korisnika
@@ -236,7 +236,7 @@ Route::post('/obrisi_recenziju', [ModeratorKontroler::class, "obrisi_recenziju"]
  * "reason": "Uspesno ili neuspesno "
  * }
  */
-Route::post('/proizvod',[AdminKontroler::class,'dodaj_proizvod']);
+Route::post('/proizvod', [AdminKontroler::class, 'dodaj_proizvod']);
 
 /**
  * Ruta kojom se kupuje proizvod
@@ -281,7 +281,7 @@ Route::post('/proizvod',[AdminKontroler::class,'dodaj_proizvod']);
  * "reason": "Uspesno, neuspesno ili delimicno"
  * }
  */
-Route::post('/kupi',[KorisnikKontroler::class,'kupi_proizvod']);
+Route::post('/kupi', [KorisnikKontroler::class, 'kupi_proizvod']);
 
 /**
  * Ruta kojom se dodaje proizvod u listu zelja
@@ -297,7 +297,7 @@ Route::post('/kupi',[KorisnikKontroler::class,'kupi_proizvod']);
  * "reason": "Uspesno ili neuspesno "
  * }
  */
-Route::post('/zeli',[KorisnikKontroler::class,'dodaj_u_listu_zelja']);
+Route::post('/zeli', [KorisnikKontroler::class, 'dodaj_u_listu_zelja']);
 
 
 /* 
@@ -314,8 +314,41 @@ Route::post('/zeli',[KorisnikKontroler::class,'dodaj_u_listu_zelja']);
  */
 Route::post('/filter', [GlavniKontroler::class, 'filter']);
 /*
- * Ruta za preporuku proizvoda, salje se get zahtev sa lat i long parametrima
+ * Ruta za preporuku proizvoda, salje se get zahtev u sledecem obliku
+ * {
+ *  "lat" : "lat",
+ *  "long" : "long",
+ *  "Username" : "username",
+ *  "Password" : "password"
+ * }
  * 
  * Povratna vrednost je json niz Proizvoda
  */
-Route::get('/preporuka/{lat},{long}', [GlavniKontroler::class, 'preporuka']);
+Route::post('/preporuka', [GlavniKontroler::class, 'preporuka']);
+
+/** Ruta koja sluzi za dohvatanje svih proizvoda
+ * 
+ */
+Route::get('/proizvodi', [KorisnikKontroler::class, 'dohvati_sve_proizvode']);
+
+
+Route::post('/dodajVelicinu', [AdminKontroler::class, 'dodaj_novu_velicinu']);
+
+Route::post('/dohvati_sve_recenzije', [ModeratorKontroler::class, 'dohvati_sve_recenzije']);
+
+Route::post('/dohvati_korisnika', [ModeratorKontroler::class, 'dohvati_korisnika']);
+
+Route::post('/dohvati_proizvod_sa_id', [KorisnikKontroler::class, 'dohvati_proizvod_sa_id']);
+Route::get('/ime', [KorisnikKontroler::class, 'dohvati_ime']);
+Route::get('/adresa', [KorisnikKontroler::class, 'dohvati_adresu']);
+Route::get('/kartica', [KorisnikKontroler::class, 'dohvati_karticu']);
+//Kupovina
+Route::post('/dohvatiPodatke', [KorisnikKontroler::class, 'dohvati_podatke']);
+Route::post('/zeli_sa_id', [KorisnikKontroler::class, 'dohvati_listu_zelja']);
+
+Route::post('/dodaj_u_lz', [KorisnikKontroler::class, 'dodaj_u_lz']);
+
+
+Route::post('/promeni_obavestavanje', [KorisnikKontroler::class, 'promeni_obavestavanje']);
+
+Route::post('/obrisi_iz_ls', [KorisnikKontroler::class, 'obrisi_iz_ls']);

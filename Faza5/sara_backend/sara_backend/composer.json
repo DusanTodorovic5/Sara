@@ -13,7 +13,11 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^8.0",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "mailgun/mailgun-php": "^3.5",
+        "nyholm/psr7": "^1.5",
+        "symfony/http-client": "^5.4",
+        "symfony/mailgun-mailer": "^5.4"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",

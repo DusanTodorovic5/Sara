@@ -19,44 +19,56 @@ use Laravel\Sanctum\HasApiTokens;
  * pomocne metode 'check_email', 
  * 'check_username', 'dohvati_sve' i 'dohv_sa_id'.
  */
+
 class Korisnik extends Authenticatable
 {
     use  HasFactory, Notifiable;
- 
-    protected $table='korisnik';
-    protected $primaryKey='ID';
-    public $timestamps=false;
+
+    protected $table = 'korisnik';
+    protected $primaryKey = 'ID';
+    public $timestamps = false;
 
     protected $fillable = [
         'ID', 'Username', 'Password', 'ImeIPrezime', 'Email', 'Pol', 'Potroseno', 'Datum', 'Tip'
     ];
-    
-    public function getAuthPassword(){
+
+    public function getAuthPassword()
+    {
         return $this->Password;
     }
 
-     // Metod vraca true u slucaju da ne postoji dati email
-     static function check_email($email) {
+    // Metod vraca true u slucaju da ne postoji dati email
+    static function check_email($email)
+    {
         // where query->get() vraca listu korisnika sa zadatim emailom, isEmpty vraca true ako je lista prazna
         return Korisnik::where("Email", $email)->get()->isEmpty();
     }
     // Metod vraca true u slucaju da ne postoji dati username
-    static function check_username($username) {
+    static function check_username($username)
+    {
         // where query->get() vraca listu korisnika sa zadatim usernamom, isEmpty vraca true ako je lista prazna
         return Korisnik::where("Username", $username)->get()->isEmpty();
     }
 
+    static function dohvati_godine_static($username)
+    {
+        return Korisnik::where("Username", $username)->get()->first()->dohvati_godine();
+    }
+
     //Staticki metod dohvati_sve sluzi nam za dohvatanje svih korisnika iz baze podataka. 
-    public static function dohvati_sve(){
+    public static function dohvati_sve()
+    {
         return Korisnik::all();
     }
-    
+
     //Staticki metod dohvati_sa_id sluzi nam za dohvatanje korisnika sa zadatim ID.
-    public static function dohv_sa_id($id){
-        return Korisnik::where('ID',$id)->get();
+    public static function dohv_sa_id($id)
+    {
+        return Korisnik::where('ID', $id)->get();
     }
     // Usluzni metod za dohvatanje starosti Korisnika
-    public function dohvati_godine(){
-        return Carbon::now()->year - (new Carbon($this->Datum))->year; 
+    public function dohvati_godine()
+    {
+        return Carbon::now()->year - (new Carbon($this->Datum))->year;
     }
 }
