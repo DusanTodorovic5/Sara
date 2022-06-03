@@ -1,5 +1,5 @@
 <?php
-
+//Dusan Todorovic 0393/2019
 //Ivana Trtovic 0306/2019
 
 namespace App\Http\Controllers;
@@ -55,14 +55,14 @@ class AdminKontroler extends Controller
             ]);
         }
     }
-
+    // Metod za slanje mejla preko Mailgun api-ja
     public static function basic_email($id)
     {
-        # Instantiate the client.
+        # Instancijar klijenta
         $mgClient = Mailgun::create('beac00b6650ac2258f09bcaf77983990-27a562f9-fc7afaae');
         $domain = "sandboxd909a5f41027416ba771aa99af73d064.mailgun.org";
 
-        # Make the call to the client.
+        # Pozovi klijenta i posalji mejl
         $result = $mgClient->messages()->send(
             "$domain",
             array(

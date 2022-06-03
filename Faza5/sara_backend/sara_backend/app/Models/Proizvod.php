@@ -1,5 +1,5 @@
 <?php
-
+//Dusan Todorovic 0393/2019
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

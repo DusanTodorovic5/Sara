@@ -1,7 +1,7 @@
 <?php
 
 //Ana Maksimovic 0174/2019
-
+//Dusan Todorovic 0393/2019
 namespace App\Http\Controllers;
 
 use App\Weather\WeatherApi;

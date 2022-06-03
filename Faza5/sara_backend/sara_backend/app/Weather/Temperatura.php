@@ -1,5 +1,5 @@
 <?php
-
+//Dusan Todorovic 0393/2019
 namespace App\Weather;
 /*
  * Klasa koja mapira temperaturu u neki od zadatih stringova

@@ -164,17 +164,32 @@ class _MyHomePageState extends State<MyHomePage> {
                     shrinkWrap: true, // You won't see infinite size error
                     crossAxisCount: 3,
                     children: snapshot.data!.map((e) {
-                      return Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: GestureDetector(
-                            child: Image.network(
-                              "http://localhost/detalji/" +
-                                  e.putanja +
-                                  "/s1.png",
-                            ),
-                            onTap: () {
-                              print(e.id);
-                            }),
+                      return SizedBox(
+                        height: 400,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: GestureDetector(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.network(
+                                    "http://localhost/detalji/" +
+                                        e.putanja +
+                                        "/s1.png",
+                                    height: 300,
+                                  ),
+                                  Text(e.naziv),
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  "/proizvod?id=" + e.id.toString(),
+                                ).then((value) {
+                                  setState(() {});
+                                });
+                              }),
+                        ),
                       );
                     }).toList(),
                   );
@@ -191,156 +206,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-/*
- Container(
-            height: 200,
-            alignment: Alignment.topLeft,
-            color: const Color.fromARGB(255, 140, 187, 241),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Briga o potrošačima",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(fontSize: 25, color: Colors.white),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "Ekskluzivna usluga",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Kontaktirajte nas",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Pomoć",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Narudžbine",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Povraćaj novca",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "O nama",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(fontSize: 25, color: Colors.white),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "Profil kompanije",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Podaci kompanije",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Odnos sa investitorima",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Karijere",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Prava",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(fontSize: 25, color: Colors.white),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "Pravne napomene",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Uslovi",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Politika privatnosti",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          "Politika kolačića",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: const [
-                    Text(
-                      "Omogućili",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(fontSize: 25, color: Colors.white),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      "Dušan Todorović",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "Ana Maksimović",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "Ivana Trtović",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "Janko Tufegdžić",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-          */

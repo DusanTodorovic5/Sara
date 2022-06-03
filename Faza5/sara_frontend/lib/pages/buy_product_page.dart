@@ -487,8 +487,7 @@ class _BuyProductsPage extends State<BuyProductsPage> {
           },
           "idA": this.idA,
           "idK": this.idK,
-        }));
-    print(response.body);
+        },),);
     return true;
   }
 }

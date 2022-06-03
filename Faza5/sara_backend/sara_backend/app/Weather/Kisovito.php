@@ -1,5 +1,5 @@
 <?php
-
+//Dusan Todorovic 0393/2019
 namespace App\Weather;
 /*
  * Klasa koja mapira kisovitost u neki od zadatih stringova
@@ -22,5 +22,3 @@ class Kisovito {
     private $tipovi = ['Pljusak', 'Kisa', 'Suvo'];
     private $tip = 0;
 }
-
-?>
